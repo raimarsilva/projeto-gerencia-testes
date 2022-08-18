@@ -14,11 +14,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode
-final class Advogado {
-	private int idAdv=0;
-	private String nomeAdv="";
-	private String registroOAB="";
-	private Processo processo;
+public final class Advogado {
+	public String idAdv="";
+	public String nomeAdv="";
+	public String registroOAB="";
+	public Processo processo;
 	
 	@Override
 	public String toString() {

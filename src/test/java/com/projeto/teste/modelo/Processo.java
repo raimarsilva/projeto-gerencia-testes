@@ -14,18 +14,19 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode
-final class Processo {
-	private String numProces = "";
-	private String orgaoJudic = "";
-	private String relator="";
-	private Advogado advogado;
+public final class Processo {
+	public String idProcesso;
+	public String numProces = "";
+	public String orgaoJudic = "";
+	public String relator="";
+	public Advogado advogado;
 	
-	protected Boolean associarAdvogado(Advogado advog) {
+	public Boolean associarAdvogado(Advogado advog) {
 		this.advogado = advog;
 		return true;
 	}
 	
-	protected Boolean dissociarAdvogado(Advogado advog) {
+	public Boolean dissociarAdvogado(Advogado advog) {
 		// fazer logica.
 		return true;
 	}
