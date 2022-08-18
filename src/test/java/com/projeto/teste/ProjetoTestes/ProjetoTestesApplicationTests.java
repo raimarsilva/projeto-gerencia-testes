@@ -8,7 +8,6 @@ class ProjetoTestesApplicationTests {
 
 	@Test
 	void contextLoads() {
-		System.out.println("2 subindo pelo eclipse");
 	}
 
 }
