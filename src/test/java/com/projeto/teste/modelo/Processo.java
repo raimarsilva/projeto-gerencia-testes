@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.projeto.teste.ProjetoTestes;
+package com.projeto.teste.modelo;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
