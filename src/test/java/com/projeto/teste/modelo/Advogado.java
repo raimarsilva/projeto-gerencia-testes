@@ -20,6 +20,13 @@ public final class Advogado {
 	public String registroOAB="";
 	public Processo processo;
 	
+	public Advogado(String idAdv, String nomeAdv, String registroOAB) {
+		super();
+		this.idAdv = idAdv;
+		this.nomeAdv = nomeAdv;
+		this.registroOAB = registroOAB;
+	}
+
 	@Override
 	public String toString() {
 		return "Advogado [idAdv=" + idAdv + ", nomeAdv=" + nomeAdv + ", registroOAB=" + registroOAB + ", processo="

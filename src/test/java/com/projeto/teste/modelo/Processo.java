@@ -5,22 +5,32 @@ package com.projeto.teste.modelo;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * @author Iramar Jetterson Ramon Raimar
  *
  */
 @Data
-@NoArgsConstructor
-@EqualsAndHashCode
 public final class Processo {
-	public String idProcesso;
-	public String numProces = "";
-	public String orgaoJudic = "";
-	public String relator="";
-	public Advogado advogado;
 	
+	private String idProcesso;
+	private String numProces;
+	private String orgaoJudic;
+	private String relator;
+	private Advogado advogado;
+	
+	public Processo(String idProcesso, String numProces, String orgaoJudic, String relator, Advogado advogado) {
+		super();
+		this.idProcesso = idProcesso;
+		this.numProces = numProces;
+		this.orgaoJudic = orgaoJudic;
+		this.relator = relator;
+		this.advogado = advogado;
+	}
+
 	public Boolean associarAdvogado(Advogado advog) {
 		this.advogado = advog;
 		return true;
