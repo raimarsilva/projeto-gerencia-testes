@@ -9,3 +9,11 @@ e Teste de Software.
 - Spring Data JPA;
 - Springdoc OpenAPI UI
 - PostgreSQL;
+
+### Execução com Docker
+Com o docker instalado na máquina, acesse a pasta
+raiz do projeto e execute os comandos abaixo para
+rodar o projeto.
+
+    $ docker-compose build
+    $ docker-compose up
