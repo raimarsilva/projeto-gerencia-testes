@@ -30,8 +30,14 @@ public class AdvogadoService {
 
     }
 
-    public Advogado atualizar(Advogado advogado){
-        return advogadoRepository.save(advogado);
+    public Advogado atualizar(Long id, Advogado advogado){
+        if(advogadoRepository.findById(id).isPresent()){
+            return advogadoRepository.save(advogado);
+
+        }else{
+            return null;
+        }
+
     }
 
     public boolean deletarPeloId(Long id){

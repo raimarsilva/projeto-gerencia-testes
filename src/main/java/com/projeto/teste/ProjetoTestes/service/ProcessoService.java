@@ -30,8 +30,13 @@ public class ProcessoService {
 
     }
 
-    public Processo atualizar(Processo processo){
-        return processoRepository.save(processo);
+    public Processo atualizar(Long id, Processo processo){
+        if(processoRepository.findById(id).isPresent()){
+            return processoRepository.save(processo);
+
+        }else{
+            return null;
+        }
     }
 
     public boolean deletarPeloId(Long id){
