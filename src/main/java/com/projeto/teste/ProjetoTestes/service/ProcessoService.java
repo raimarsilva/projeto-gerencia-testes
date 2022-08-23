@@ -4,6 +4,7 @@ import com.projeto.teste.ProjetoTestes.model.Processo;
 import com.projeto.teste.ProjetoTestes.repository.ProcessoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class ProcessoService {
 
     public Processo buscarPeloId(Long id){
         if(processoRepository.findById(id).isPresent()) {
+
             return processoRepository.findById(id).get();
         }else{
             return null;
@@ -41,11 +43,18 @@ public class ProcessoService {
 
     public boolean deletarPeloId(Long id){
         if(processoRepository.findById(id).isPresent()){
+            fazerDesvinculacaoProcesso(id);
             processoRepository.deleteById(id);
             return true;
         }else{
             return false;
         }
+    }
+
+    // Método para fazer a desvinculação dos processos com advogados
+    @Transactional
+    public void fazerDesvinculacaoProcesso(Long id){
+        processoRepository.deletarProcessoVinculado(id);
     }
 
 
