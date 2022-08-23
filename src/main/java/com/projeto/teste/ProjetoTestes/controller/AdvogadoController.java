@@ -27,15 +27,19 @@ public class AdvogadoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(advogadoService.salvar(advogado));
     }
 
-    // Rota para salvar
+    // Rota para vincular
     @PostMapping(path = "/advogado/{id_advogado}/{id_processo}")
-    public ResponseEntity<Advogado> salvar(@PathVariable Long id_advogado, @PathVariable Long id_processo){
+    public ResponseEntity<Advogado> vincular(@PathVariable Long id_advogado, @PathVariable Long id_processo){
 
         Advogado advogado = advogadoService.buscarPeloId(id_advogado);
         Processo processo = processoService.buscarPeloId(id_processo);
 
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(advogadoService.vincularProcesso(advogado, processo));
+        if((advogado != null) && (processo != null)) {
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(advogadoService.vincularProcesso(advogado, processo));
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
     // Rota para listar todos
@@ -62,6 +66,21 @@ public class AdvogadoController {
             return ResponseEntity.status(HttpStatus.OK).body("Deletado com sucesso");
         }else{
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não encontrado");
+        }
+    }
+
+    // Rota para desvincular
+    @DeleteMapping(path = "/advogado/{id_advogado}/{id_processo}")
+    public ResponseEntity<Advogado> desvincular(@PathVariable Long id_advogado, @PathVariable Long id_processo){
+
+        Advogado advogado = advogadoService.buscarPeloId(id_advogado);
+        Processo processo = processoService.buscarPeloId(id_processo);
+
+        if((advogado != null) && (processo != null)) {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(advogadoService.desvincularProcesso(advogado, processo));
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
 
