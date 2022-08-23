@@ -33,7 +33,7 @@ public class Advogado{
     private String registroOAB;
 
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "tb_vinculacao", joinColumns = @JoinColumn(name = "id_advogado",
             referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "id_processo", referencedColumnName = "id"))
