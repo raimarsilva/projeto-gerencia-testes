@@ -48,6 +48,13 @@ public class AdvogadoService {
         return advogadoRepository.save(advogado);
     }
 
+    public Advogado desvincularProcesso(Advogado advogado, Processo processo){
+        advogado.getProcessos().remove(processo);
+
+        return advogadoRepository.save(advogado);
+    }
+
+
     public Advogado atualizar(Long id, Advogado advogado){
         if(advogadoRepository.findById(id).isPresent()){
             return advogadoRepository.save(advogado);
