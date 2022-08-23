@@ -42,9 +42,6 @@ public class AdvogadoService {
     }
 
     public Advogado vincularProcesso(Advogado advogado, Processo processo){
-
-
-
         advogado.getProcessos().add(processo);
 
         return advogadoRepository.save(advogado);

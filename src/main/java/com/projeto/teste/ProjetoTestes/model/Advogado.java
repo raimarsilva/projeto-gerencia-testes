@@ -23,6 +23,7 @@ import java.util.Set;
 @EqualsAndHashCode
 
 @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+// JPA
 @Entity
 @Table(name = "tb_advogado")
 public class Advogado{
