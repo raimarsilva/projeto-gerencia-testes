@@ -22,7 +22,7 @@ import java.util.Set;
 @NoArgsConstructor
 @EqualsAndHashCode
 
-
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 @Entity
 @Table(name = "tb_advogado")
 public class Advogado{
@@ -33,11 +33,12 @@ public class Advogado{
     private String registroOAB;
 
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "tb_vinculacao", joinColumns = @JoinColumn(name = "id_advogado",
             referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "id_processo", referencedColumnName = "id"))
-    @JsonManagedReference
+//    @JsonManagedReference(value = "JsonManagedReference")
+//    @JsonBackReference(value = "JsonBackReference")
     Set<Processo> processos;
 
 

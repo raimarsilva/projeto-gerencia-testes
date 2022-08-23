@@ -38,7 +38,6 @@ public class AdvogadoController {
                 .body(advogadoService.vincularProcesso(advogado, processo));
     }
 
-
     // Rota para listar todos
     @GetMapping(path = "/advogados")
     public ResponseEntity<List<Advogado>> listarTodos(){

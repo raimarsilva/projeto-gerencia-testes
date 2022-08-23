@@ -1,9 +1,6 @@
 package com.projeto.teste.ProjetoTestes.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -15,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 @ToString
-
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 // Anotações lombok
 @Data
 @AllArgsConstructor
@@ -33,7 +30,9 @@ public class Processo {
     private String relator;
 
     @ManyToMany
-    @JsonBackReference
+//    @JsonBackReference(value = "JsonBackReference")
+//    @JsonManagedReference(value = "JsonManagedReference")
+    @JsonIgnore
     Set<Advogado> advogados;
 
 }
