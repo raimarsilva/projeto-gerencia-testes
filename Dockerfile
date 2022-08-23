@@ -4,7 +4,7 @@ COPY . .
 
 # Utilizar o -x test para retirar os testes na compilação, pois dará erro
 # por causa do banco de dados
-RUN ./gradlew clean build -x test
+# RUN ./gradlew clean build -x test
 
 RUN chmod +x /build/libs/Projeto-Testes-0.0.1-SNAPSHOT.jar
 

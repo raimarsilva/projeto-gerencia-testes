@@ -1,30 +1,44 @@
 package com.projeto.teste.ProjetoTestes.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
+@ToString
 // Anotações lombok
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-// Anotações JPA
+
+
 @Entity
 @Table(name = "tb_advogado")
-public class Advogado {
+public class Advogado{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private String registroOAB;
 
-    @OneToMany(mappedBy = "advogado")
-    Set<VinculadoAdvProc> vinculacoes;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "tb_vinculacao", joinColumns = @JoinColumn(name = "id_advogado",
+            referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "id_processo", referencedColumnName = "id"))
+    @JsonManagedReference
+    Set<Processo> processos;
+
 
 }

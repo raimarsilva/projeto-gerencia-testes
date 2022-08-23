@@ -1,7 +1,9 @@
 package com.projeto.teste.ProjetoTestes.controller;
 
 import com.projeto.teste.ProjetoTestes.model.Advogado;
+import com.projeto.teste.ProjetoTestes.model.Processo;
 import com.projeto.teste.ProjetoTestes.service.AdvogadoService;
+import com.projeto.teste.ProjetoTestes.service.ProcessoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +18,26 @@ public class AdvogadoController {
     @Autowired
     AdvogadoService advogadoService;
 
+    @Autowired
+    ProcessoService processoService;
+
     // Rota para salvar
     @PostMapping(path = "/advogado")
     public ResponseEntity<Advogado> salvar(@RequestBody Advogado advogado){
         return ResponseEntity.status(HttpStatus.CREATED).body(advogadoService.salvar(advogado));
     }
+
+    // Rota para salvar
+    @PostMapping(path = "/advogado/{id_advogado}/{id_processo}")
+    public ResponseEntity<Advogado> salvar(@PathVariable Long id_advogado, @PathVariable Long id_processo){
+
+        Advogado advogado = advogadoService.buscarPeloId(id_advogado);
+        Processo processo = processoService.buscarPeloId(id_processo);
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(advogadoService.vincularProcesso(advogado, processo));
+    }
+
 
     // Rota para listar todos
     @GetMapping(path = "/advogados")

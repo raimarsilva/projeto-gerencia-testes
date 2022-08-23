@@ -1,12 +1,20 @@
 package com.projeto.teste.ProjetoTestes.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+@ToString
 
 // Anotações lombok
 @Data
@@ -24,7 +32,8 @@ public class Processo {
     private String orgaoJudic;
     private String relator;
 
-    @OneToMany(mappedBy = "processo")
-    Set<VinculadoAdvProc> vinculacoes;
+    @ManyToMany
+    @JsonBackReference
+    Set<Advogado> advogados;
 
 }
