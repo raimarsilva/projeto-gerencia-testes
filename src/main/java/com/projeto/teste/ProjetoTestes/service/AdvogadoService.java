@@ -28,7 +28,6 @@ public class AdvogadoService {
     }
 
 
-
     public List<Advogado> listarTodos(){
         return advogadoRepository.findAll();
     }

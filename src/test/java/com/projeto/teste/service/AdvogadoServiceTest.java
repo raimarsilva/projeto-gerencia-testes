@@ -104,14 +104,14 @@ public class AdvogadoServiceTest {
 
         // Verificações
         Assertions.assertFalse(advogado.getProcessos().isEmpty());
-        Assertions.assertEquals(advogado.getProcessos().size(), 1);
+        Assertions.assertEquals(1, advogado.getProcessos().size());
         Assertions.assertTrue(advogado.getProcessos().contains(processo));
         // processo vinculado
         Processo processoVinculado = advogado.getProcessos().iterator().next();
-        Assertions.assertEquals(processoVinculado.getId(), processo.getId() );
-        Assertions.assertEquals(processoVinculado.getNumero(), processo.getNumero() );
-        Assertions.assertEquals(processoVinculado.getRelator(), processo.getRelator() );
-        Assertions.assertEquals(processoVinculado.getOrgaoJudic(), processo.getOrgaoJudic() );
+        Assertions.assertEquals(processo.getId(), processoVinculado.getId() );
+        Assertions.assertEquals(processo.getNumero(), processoVinculado.getNumero() );
+        Assertions.assertEquals(processo.getRelator(), processoVinculado.getRelator() );
+        Assertions.assertEquals(processo.getOrgaoJudic(), processoVinculado.getOrgaoJudic() );
 
     }
 
