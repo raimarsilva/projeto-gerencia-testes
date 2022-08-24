@@ -10,6 +10,7 @@ import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.Assert.assertEquals;
 
@@ -60,6 +61,13 @@ public class AdvogadoService {
         return advogadoRepository.save(advogado);
     }
 
+    public Advogado desvincularProcesso(Advogado advogado, Processo processo){
+        advogado.getProcessos().remove(processo);
+
+        return advogadoRepository.save(advogado);
+    }
+
+
     public Advogado atualizar(Long id, Advogado advogado){
         if(advogadoRepository.findById(id).isPresent()){
             return advogadoRepository.save(advogado);
@@ -72,10 +80,18 @@ public class AdvogadoService {
 
     public boolean deletarPeloId(Long id){
         if(advogadoRepository.findById(id).isPresent()){
+            fazerDesvinculacaoAdvogado(id);
             advogadoRepository.deleteById(id);
             return true;
         }else{
             return false;
         }
     }
+
+    // Método para fazer a desvinculação dos processos com advogados
+    @Transactional
+    public void fazerDesvinculacaoAdvogado(Long id){
+        advogadoRepository.deletarAdvogadoVinculado(id);
+    }
+
 }
