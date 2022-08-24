@@ -90,5 +90,12 @@ public class AdvogadoServiceTest {
     }
 
 
+    @Test
+    @DisplayName(value = "Vincular um processo a um advogado com sucesso")
+    void vincularProcesso_ComSucesso(){
+
+
+    }
+
 
 }
