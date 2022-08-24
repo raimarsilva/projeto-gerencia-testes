@@ -43,6 +43,8 @@ public class AdvogadoServiceTest {
         BDDMockito.when(advogadoRepository
                         .save(ArgumentMatchers.eq(AdvogadoUtil.advogadoProcessoVinculado())))
                 .thenReturn(AdvogadoUtil.advogadoProcessoVinculado());
+
+
     }
 
     @Test
@@ -115,5 +117,22 @@ public class AdvogadoServiceTest {
 
     }
 
+
+    @Test
+    @DisplayName(value = "Desvincular um processo de um advogado com sucesso")
+    void desvincularProcesso_ComSucesso(){
+        // Preparando o cenário
+        Advogado advogado = AdvogadoUtil.advogadoProcessoVinculado();
+        // Pegando o processo que desejo desvincular
+        Processo processo = advogado.getProcessos().iterator().next();
+
+        // Chamando método
+        advogado = advogadoService.desvincularProcesso(advogado, processo);
+
+        // Verificações
+        Assertions.assertTrue(advogado.getProcessos().isEmpty());
+        Assertions.assertEquals(0, advogado.getProcessos().size());
+        Assertions.assertFalse(advogado.getProcessos().contains(processo));
+    }
 
 }
