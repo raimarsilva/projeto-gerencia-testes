@@ -2,12 +2,15 @@ package com.projeto.teste.util;
 
 import com.projeto.teste.ProjetoTestes.model.Advogado;
 
+import java.util.HashSet;
+
 public class AdvogadoUtil {
     // Retorna um advogado sem id
     public static Advogado advogadoParaSalvar() {
         return Advogado.builder()
                 .nome("Fulano da Silva")
                 .registroOAB("UF999999")
+                .processos(new HashSet<>())
                 .build();
     }
 
@@ -18,6 +21,7 @@ public class AdvogadoUtil {
                 .id(1L)
                 .nome("Fulano da Silva")
                 .registroOAB("UF999999")
+                .processos(new HashSet<>())
                 .build();
     }
 
@@ -28,6 +32,7 @@ public class AdvogadoUtil {
                 .id(1L)
                 .nome("Fulano da Silva")
                 .registroOAB("UF999999")
+                .processos(new HashSet<>())
                 .build();
 
         advogado.getProcessos().add(ProcessoUtil.processoValido());

@@ -1,9 +1,11 @@
 package com.projeto.teste.service;
 
 import com.projeto.teste.ProjetoTestes.model.Advogado;
+import com.projeto.teste.ProjetoTestes.model.Processo;
 import com.projeto.teste.ProjetoTestes.repository.AdvogadoRepository;
 import com.projeto.teste.ProjetoTestes.service.AdvogadoService;
 import com.projeto.teste.util.AdvogadoUtil;
+import com.projeto.teste.util.ProcessoUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -89,11 +91,27 @@ public class AdvogadoServiceTest {
         });
     }
 
-
     @Test
     @DisplayName(value = "Vincular um processo a um advogado com sucesso")
     void vincularProcesso_ComSucesso(){
 
+        // Preparando o cenário
+        Advogado advogado = AdvogadoUtil.advogadoValido();
+        Processo processo = ProcessoUtil.processoValido();
+
+        // Chamando método
+        advogado = advogadoService.vincularProcesso(advogado, processo);
+
+        // Verificações
+        Assertions.assertFalse(advogado.getProcessos().isEmpty());
+        Assertions.assertEquals(advogado.getProcessos().size(), 1);
+        Assertions.assertTrue(advogado.getProcessos().contains(processo));
+        // processo vinculado
+        Processo processoVinculado = advogado.getProcessos().iterator().next();
+        Assertions.assertEquals(processoVinculado.getId(), processo.getId() );
+        Assertions.assertEquals(processoVinculado.getNumero(), processo.getNumero() );
+        Assertions.assertEquals(processoVinculado.getRelator(), processo.getRelator() );
+        Assertions.assertEquals(processoVinculado.getOrgaoJudic(), processo.getOrgaoJudic() );
 
     }
 
