@@ -17,6 +17,7 @@ import java.util.Set;
 
 @ToString
 // Anotações lombok
+@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
