@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 @ToString
+@Builder
 @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 // Anotações lombok
 @Data
