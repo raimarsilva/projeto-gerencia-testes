@@ -6,8 +6,12 @@ import com.projeto.teste.ProjetoTestes.repository.AdvogadoRepository;
 import com.projeto.teste.ProjetoTestes.repository.ProcessoRepository;
 import lombok.extern.java.Log;
 import lombok.extern.log4j.Log4j2;
+
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 import java.util.Set;
@@ -22,8 +26,17 @@ public class AdvogadoService {
     @Autowired
     ProcessoRepository processoRepository;
 
+    
+    /**
+     * @author Método: Iramar. Teste: Raimar
+     * @param advogado
+     * @return Retorna um objeto do tipo Advogado.
+     */
+    @Test
     public Advogado salvar(Advogado advogado){
-        return advogadoRepository.save(advogado);
+    	Advogado adv = advogadoRepository.save(advogado);
+    	assertEquals(adv, advogado);
+        return adv;
     }
 
 
