@@ -1,13 +1,13 @@
 package com.projeto.teste.ProjetoTestes.service;
 
-import com.projeto.teste.ProjetoTestes.model.Processo;
-import com.projeto.teste.ProjetoTestes.repository.ProcessoRepository;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import com.projeto.teste.ProjetoTestes.model.Processo;
+import com.projeto.teste.ProjetoTestes.repository.ProcessoRepository;
 
 @Service
 public class ProcessoService {
@@ -17,7 +17,6 @@ public class ProcessoService {
     
     public Processo salvar(Processo processo){
     	return processoRepository.save(processo);
-    	
     }
 
     public List<Processo> listarTodos(){

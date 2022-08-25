@@ -2,7 +2,6 @@ package com.projeto.teste.ProjetoTestes.service;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.projeto.teste.ProjetoTestes.model.Advogado;
 import com.projeto.teste.ProjetoTestes.model.Processo;
 import com.projeto.teste.ProjetoTestes.repository.AdvogadoRepository;
-import com.projeto.teste.ProjetoTestes.repository.ProcessoRepository;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -21,9 +19,12 @@ public class AdvogadoService {
     @Autowired
     AdvogadoRepository advogadoRepository;
 
-    @Autowired
-    ProcessoRepository processoRepository;
-
+    
+    /**
+     * @author Método: Iramar. Teste: Raimar
+     * @param advogado
+     * @return Retorna um objeto do tipo Advogado.
+     */
 
 
     public Advogado salvar(Advogado advogado){
