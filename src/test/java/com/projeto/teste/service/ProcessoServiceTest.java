@@ -20,7 +20,6 @@ import com.projeto.teste.util.ProcessoUtil;
 
 @ExtendWith(SpringExtension.class)
 class ProcessoServiceTest {
-	
 	@InjectMocks
     ProcessoService processoService;
 
@@ -77,20 +76,21 @@ class ProcessoServiceTest {
 	/**
 	 * @author Raimar Silva de Lima
 	 */
-	@Test
-	@DisplayName(value = "Deletar um processo pelo ID com sucesso.")
-	void testDeletarPeloId() {
-		// cria um objeto do tipo Processo com ID.
-    	Processo processoEsperado = ProcessoUtil.processoValido();
-    	
-    	boolean foiDeletado = processoService.deletarPeloId(processoEsperado.getId());
-    	
-    	// Testes para o processo que foi deletado.
-    	Assertions.assertTrue(foiDeletado);
-	}
-	
+//	@Test
+//	@DisplayName(value = "Deletar um processo pelo ID com sucesso.")
+//	void testDeletarPeloId() {
+//		// cria um objeto do tipo Processo com ID.
+//    	Processo processoEsperado = ProcessoUtil.processoValido();
+//
+//    	boolean foiDeletado = processoService.deletarPeloId(processoEsperado.getId());
+//
+//    	// Testes para o processo que foi deletado.
+//    	Assertions.assertTrue(foiDeletado);
+//	}
+//
 	/**
 	 * @author Raimar Silva de Lima
+<<<<<<< HEAD
 	 */
 	@Test
 	@DisplayName(value = "Deletar um processo pelo ID com id inválido.")
@@ -103,5 +103,17 @@ class ProcessoServiceTest {
     	// Testes para o processo que foi deletado sem Id válido.
     	Assertions.assertFalse(foiDeletado);
 	}
+//	 */
+//	@Test
+//	@DisplayName(value = "Deletar um processo pelo ID com id inválido.")
+//	void testDeletarPeloIdFalho() {
+//		// cria um objeto do tipo Processo SEM ID.
+//    	Processo processoEsperado = ProcessoUtil.processoSemID();
+//
+//    	boolean foiDeletado = processoService.deletarPeloId(processoEsperado.getId());
+//
+//    	// Testes para o processo que foi deletado sem Id válido.
+//    	Assertions.assertFalse(foiDeletado);
+//    	Assertions.fail("Informe um processo válido");
 
 }
