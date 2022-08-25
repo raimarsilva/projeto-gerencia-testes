@@ -135,4 +135,26 @@ public class AdvogadoServiceTest {
         Assertions.assertFalse(advogado.getProcessos().contains(processo));
     }
 
+    @Test
+    @DisplayName(value = "Buscar um advogado pelo id ")
+    void buscarIdAdvogado(){
+        
+        //preparando cenário
+        Advogado advogadoTeste = AdvogadoUtil.advogadoValido();
+        advogadoTeste = advogadoService.salvar(advogadoTeste);
+
+
+        // chamando o método que será testado
+        Advogado advogadoBuscado = advogadoService.buscarPeloId(1L);
+
+        // chamando o método que será testado com ID de advogado que não existe
+        Advogado advogadoNulo = advogadoService.buscarPeloId(2L);
+
+        // Verificações
+        Assertions.assertEquals(advogadoTeste, advogadoBuscado);
+
+        Assertions.assertNull(advogadoNulo);
+
+    }
+
 }
