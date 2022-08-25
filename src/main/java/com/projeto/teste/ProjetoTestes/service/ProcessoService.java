@@ -17,7 +17,6 @@ public class ProcessoService {
     
     public Processo salvar(Processo processo){
     	return processoRepository.save(processo);
-    	
     }
 
     public List<Processo> listarTodos(){
