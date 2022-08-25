@@ -36,10 +36,8 @@ public class AdvogadoService {
     @Test
     public Advogado salvar(Advogado advogado){
     	Advogado adv = advogadoRepository.save(advogado);
-    	assertEquals(adv, advogado);
         return adv;
     }
-
 
 
     public List<Advogado> listarTodos(){

@@ -2,7 +2,19 @@ plugins {
 	id 'org.springframework.boot' version '2.7.2'
 	id 'io.spring.dependency-management' version '1.0.12.RELEASE'
 	id 'java'
+	// Other Plugins
+	id("jacoco")
 }
+
+
+jacoco {
+	toolVersion = "0.8.7"
+}
+
+// Execute
+// ./gradlew build
+// ./gradlew jacocoTestReport
+// Caminho $buildDir/reports/jacoco/test e abrir o index.html
 
 group = 'com.projeto.teste'
 version = '0.0.1-SNAPSHOT'
@@ -26,6 +38,9 @@ dependencies {
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// Disponibilizando o banco de dados h2 in-memory para test
+	testRuntimeOnly 'com.h2database:h2'
 }
 
 tasks.named('test') {
