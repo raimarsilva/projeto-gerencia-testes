@@ -7,7 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.rules.ErrorCollector;
 import org.mockito.ArgumentMatchers;
 import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
@@ -21,8 +20,6 @@ import com.projeto.teste.util.ProcessoUtil;
 
 @ExtendWith(SpringExtension.class)
 class ProcessoServiceTest {
-	
-	//ErrorCollector erroCol = new ErrorCollector();
 	
 	@InjectMocks
     ProcessoService processoService;
@@ -39,7 +36,7 @@ class ProcessoServiceTest {
 	 // Quando for executado o save do repository, esse é executado tanto para salvar e atualizar processo.
         BDDMockito.when(processoRepository.save(ArgumentMatchers.any()))
                 .thenReturn(ProcessoUtil.processoValido());
-    }
+        }
     
 	/**
 	 * @author Raimar Silva de Lima

@@ -1,10 +1,7 @@
 package com.projeto.teste.ProjetoTestes.service;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.List;
 
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,7 +30,6 @@ public class AdvogadoService {
      * @return Retorna um objeto do tipo Advogado.
      */
     
-    @Test
     public Advogado salvar(Advogado advogado){
     	Advogado adv = advogadoRepository.save(advogado);
         return adv;
