@@ -21,12 +21,10 @@ public class AdvogadoService {
 
     
     /**
-     * @author Método: Iramar. Teste: Raimar
+     * @author Iramar.
      * @param advogado
      * @return Retorna um objeto do tipo Advogado.
      */
-
-
     public Advogado salvar(Advogado advogado){
     	Advogado adv = advogadoRepository.save(advogado);
         return adv;

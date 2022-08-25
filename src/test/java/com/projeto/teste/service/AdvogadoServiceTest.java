@@ -38,6 +38,10 @@ public class AdvogadoServiceTest {
         // Quando for executado o save do repository, esse é executado tanto para salvar e atualizar
         BDDMockito.when(advogadoRepository.save(ArgumentMatchers.any()))
                 .thenReturn(AdvogadoUtil.advogadoValido());
+        
+        // Quando for executado o save falho do repository.
+        BDDMockito.when(advogadoRepository.save(ArgumentMatchers.eq(null)))
+                .thenReturn(null);
 
         // Quando for executado o save do repository de um advogado com processo vinculado
         BDDMockito.when(advogadoRepository
@@ -60,6 +64,16 @@ public class AdvogadoServiceTest {
     	Assertions.assertEquals(advogadoEsperado.getId(), advogadoSalvo.getId());
         Assertions.assertEquals(advogadoEsperado.getNome(), advogadoSalvo.getNome());
         Assertions.assertEquals(advogadoEsperado.getRegistroOAB(), advogadoSalvo.getRegistroOAB());
+    }
+    
+    /**
+     * @author Raimar Silva
+     */
+    @Test
+    @DisplayName(value = "Salvar um advogado COM FALHA.")
+    public void salvarAdvogadoFalho() {
+    	// Teste para o advogado que falhou ao tentar salvar.
+    	Assertions.assertNull(advogadoService.salvar(null));
     }
     
     @Test
