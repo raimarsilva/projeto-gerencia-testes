@@ -43,10 +43,25 @@ public class AdvogadoServiceTest {
         BDDMockito.when(advogadoRepository
                         .save(ArgumentMatchers.eq(AdvogadoUtil.advogadoProcessoVinculado())))
                 .thenReturn(AdvogadoUtil.advogadoProcessoVinculado());
-
-
     }
-
+    
+    
+    @Test
+    @DisplayName(value = "Salvar um advogado com sucesso")
+    public void salvarAdvogadoQuandoValido() {
+    	// cria um objeto do tipo Advogado.
+    	Advogado advogadoEsperado = AdvogadoUtil.advogadoParaSalvar();
+    	
+    	// retorna o advogado que foi salvo no banco.
+    	Advogado advogadoSalvo = advogadoService.salvar(advogadoEsperado);
+    	
+    	// Testes para o advogado que foi salvo.
+    	Assertions.assertNotNull(advogadoSalvo);
+    	Assertions.assertEquals(advogadoEsperado.getId(), advogadoSalvo.getId());
+        Assertions.assertEquals(advogadoEsperado.getNome(), advogadoSalvo.getNome());
+        Assertions.assertEquals(advogadoEsperado.getRegistroOAB(), advogadoSalvo.getRegistroOAB());
+    }
+    
     @Test
     @DisplayName(value = "Atualizar um advogado com sucesso")
     void atualizarAdvogado_quandoSucesso(){
