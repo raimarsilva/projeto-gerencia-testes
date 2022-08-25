@@ -20,8 +20,6 @@ import com.projeto.teste.util.ProcessoUtil;
 
 @ExtendWith(SpringExtension.class)
 class ProcessoServiceTest {
-	
-
 	@InjectMocks
     ProcessoService processoService;
 
@@ -37,7 +35,9 @@ class ProcessoServiceTest {
 	 // Quando for executado o save do repository, esse é executado tanto para salvar e atualizar processo.
         BDDMockito.when(processoRepository.save(ArgumentMatchers.any()))
                 .thenReturn(ProcessoUtil.processoValido());
-    }
+        
+        
+        }
     
 	/**
 	 * @author Raimar Silva de Lima
@@ -70,7 +70,6 @@ class ProcessoServiceTest {
     	
     	// Testes para o processo que foi salvo.
     	Assertions.assertEquals(processoEsperado, processoSalvo);
-    	Assertions.fail("Informe um processo válido");
     	
 	}
 
@@ -91,6 +90,19 @@ class ProcessoServiceTest {
 //
 	/**
 	 * @author Raimar Silva de Lima
+<<<<<<< HEAD
+	 */
+	@Test
+	@DisplayName(value = "Deletar um processo pelo ID com id inválido.")
+	void testDeletarPeloIdFalho() {
+		// cria um objeto do tipo Processo SEM ID.
+    	Processo processoEsperado = ProcessoUtil.processoSemID();
+    	
+    	boolean foiDeletado = processoService.deletarPeloId(processoEsperado.getId());
+    	
+    	// Testes para o processo que foi deletado sem Id válido.
+    	Assertions.assertFalse(foiDeletado);
+	}
 //	 */
 //	@Test
 //	@DisplayName(value = "Deletar um processo pelo ID com id inválido.")
@@ -103,6 +115,5 @@ class ProcessoServiceTest {
 //    	// Testes para o processo que foi deletado sem Id válido.
 //    	Assertions.assertFalse(foiDeletado);
 //    	Assertions.fail("Informe um processo válido");
-//	}
 
 }
