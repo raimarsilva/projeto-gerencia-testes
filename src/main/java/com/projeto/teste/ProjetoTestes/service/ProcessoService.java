@@ -19,9 +19,7 @@ public class ProcessoService {
     @Autowired
     ProcessoRepository processoRepository;
     
-	@Test
     public Processo salvar(Processo processo){
-    	Assert.assertTrue(processo.getId() != null | processo.getId() != 0);
     	return processoRepository.save(processo);
     	
     }
