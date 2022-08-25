@@ -17,6 +17,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.List;
 import java.util.Optional;
 
 @ExtendWith(SpringExtension.class)
@@ -24,6 +25,8 @@ public class AdvogadoServiceTest {
 
     @InjectMocks
     AdvogadoService advogadoService;
+
+    private  List<Advogado> listaAdvogados;
 
     @Mock
     AdvogadoRepository advogadoRepository;
@@ -184,6 +187,37 @@ public class AdvogadoServiceTest {
 
         Assertions.assertNull(advogadoNulo);
 
+    }
+
+    /**
+     * @author Lucas Ramon Bandeira da Silva
+     */
+    @Test
+    @DisplayName(value = "Buscar todos os advogados")
+    void testBuscarTodos() {
+
+
+        // cria uma lista de Processos.
+
+        listaAdvogados = advogadoService.listarTodos();
+        listaAdvogados.add(new Advogado());
+
+        // Testes para que a busca foi feita com sucesso.
+        Assertions.assertFalse(listaAdvogados.isEmpty());
+    }
+
+    /**
+     * @author Lucas Ramon Bandeira da Silva
+     */
+    @Test
+    @DisplayName(value = "Buscar por uma lista de advogados vazia")
+    void testBuscarTodosFalho() {
+
+        // cria uma lista de Processos.
+        listaAdvogados = advogadoService.listarTodos();
+
+        // Testes para que a busca foi com um array vazio.
+        Assertions.assertTrue(listaAdvogados.isEmpty());
     }
 
 }
