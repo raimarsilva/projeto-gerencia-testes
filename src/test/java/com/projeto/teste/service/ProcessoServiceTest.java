@@ -181,4 +181,23 @@ class ProcessoServiceTest {
 		});
 	}
 
+	@Test
+	@DisplayName(value = "Buscar um processo pelo id.")
+	void buscarIdProcesso() {
+
+		// cria um objeto do tipo Processo com ID.
+		Processo processoTeste = ProcessoUtil.processoValido();
+
+		// retorna o processo que foi salvo no banco.
+    	Processo processoBuscado = processoService.buscarPeloId(1L);
+
+		// chamando o método que será testado com ID de advogado que não existe
+        Processo processoNulo = processoService.buscarPeloId(2L);
+
+		// Verificações
+        Assertions.assertEquals(processoTeste, processoBuscado);
+		Assertions.assertNull(processoNulo);
+
+	}
+
 }
