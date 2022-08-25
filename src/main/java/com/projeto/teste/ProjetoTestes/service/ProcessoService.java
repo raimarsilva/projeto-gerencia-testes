@@ -3,10 +3,6 @@ package com.projeto.teste.ProjetoTestes.service;
 import com.projeto.teste.ProjetoTestes.model.Processo;
 import com.projeto.teste.ProjetoTestes.repository.ProcessoRepository;
 
-import org.junit.Assert;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ErrorCollector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
