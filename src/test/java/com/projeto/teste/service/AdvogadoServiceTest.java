@@ -157,4 +157,10 @@ public class AdvogadoServiceTest {
 
     }
 
+    @Test
+    @DisplayName(value = "Deletar um advogado pelo id ")
+    void DeletarIdAdvogado(){
+
+    }
+
 }
