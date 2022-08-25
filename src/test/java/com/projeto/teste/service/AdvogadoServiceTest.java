@@ -169,9 +169,7 @@ public class AdvogadoServiceTest {
     void buscarIdAdvogado(){
         
         //preparando cenário
-        Advogado advogadoTeste = AdvogadoUtil.advogadoValido();
-        advogadoTeste = advogadoService.salvar(advogadoTeste);
-
+        Advogado advogadoTeste = AdvogadoUtil.advogadoValido();    
 
         // chamando o método que será testado
         Advogado advogadoBuscado = advogadoService.buscarPeloId(1L);
@@ -181,15 +179,31 @@ public class AdvogadoServiceTest {
 
         // Verificações
         Assertions.assertEquals(advogadoTeste, advogadoBuscado);
-
         Assertions.assertNull(advogadoNulo);
 
     }
 
     @Test
-    @DisplayName(value = "Deletar um advogado pelo id ")
+    @DisplayName(value = "Deletar um advogado pelo id com sucesso ")
     void DeletarIdAdvogado(){
 
+        Advogado advogadoTeste = AdvogadoUtil.advogadoValido();
+
+        Boolean foiDeletado = advogadoService.deletarPeloId(advogadoTeste.getId());
+
+        // Testes para o processo que foi deletado.
+    	Assertions.assertTrue(foiDeletado);
+
     }
+
+    @Test
+	@DisplayName(value = "Deletar um advogado pelo ID com id inválido.")
+	void testDeletarPeloIdFalho() {
+
+    	boolean foiDeletado = advogadoService.deletarPeloId(null);
+
+    	// Testes para o processo que foi deletado.
+    	Assertions.assertFalse(foiDeletado);
+	}
 
 }
