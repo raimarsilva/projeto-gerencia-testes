@@ -20,6 +20,9 @@ import com.projeto.teste.util.ProcessoUtil;
 
 @ExtendWith(SpringExtension.class)
 class ProcessoServiceTest {
+	
+	private boolean foiDeletado;
+	
 	@InjectMocks
     ProcessoService processoService;
 
@@ -32,10 +35,13 @@ class ProcessoServiceTest {
 	    BDDMockito.when(processoRepository.findById(ArgumentMatchers.eq(1L)))
 	            .thenReturn(Optional.ofNullable(ProcessoUtil.processoValido()));
 	    
-	 // Quando for executado o save do repository, esse é executado tanto para salvar e atualizar processo.
+	    // Quando for executado o save do repository, esse é executado tanto para salvar e atualizar processo.
         BDDMockito.when(processoRepository.save(ArgumentMatchers.any()))
                 .thenReturn(ProcessoUtil.processoValido());
         
+        // Quando for executado o save falho do repository.
+        BDDMockito.when(processoRepository.save(ArgumentMatchers.eq(null)))
+                .thenReturn(null);        
         
         }
     
@@ -62,58 +68,39 @@ class ProcessoServiceTest {
 	@Test
 	@DisplayName(value = "Salvar um processo pelo ID com falha.")
 	void testSalvarProcessoFalho() {
-		// cria um objeto do tipo Processo com ID.
-    	Processo processoEsperado = ProcessoUtil.processoValido();
     	
-    	// retorna um processo nulo que foi tentado ser salvo no banco.
-    	Processo processoSalvo = processoService.salvar(null);
     	
     	// Testes para o processo que foi salvo.
-    	Assertions.assertEquals(processoEsperado, processoSalvo);
+    	Assertions.assertNull(processoService.salvar(null));
     	
 	}
 
 	/**
 	 * @author Raimar Silva de Lima
 	 */
-//	@Test
-//	@DisplayName(value = "Deletar um processo pelo ID com sucesso.")
-//	void testDeletarPeloId() {
-//		// cria um objeto do tipo Processo com ID.
-//    	Processo processoEsperado = ProcessoUtil.processoValido();
-//
-//    	boolean foiDeletado = processoService.deletarPeloId(processoEsperado.getId());
-//
-//    	// Testes para o processo que foi deletado.
-//    	Assertions.assertTrue(foiDeletado);
-//	}
-//
+  	@Test
+  	@DisplayName(value = "Deletar um processo pelo ID com sucesso.")
+  	void testDeletarPeloId() {
+  		// cria um objeto do tipo Processo com ID.
+      	Processo processoEsperado = ProcessoUtil.processoValido();
+
+    	foiDeletado = processoService.deletarPeloId(processoEsperado.getId());
+
+    	// Testes para o processo que foi deletado.
+    	Assertions.assertTrue(foiDeletado);
+	}
+
 	/**
 	 * @author Raimar Silva de Lima
-<<<<<<< HEAD
 	 */
 	@Test
 	@DisplayName(value = "Deletar um processo pelo ID com id inválido.")
 	void testDeletarPeloIdFalho() {
-		// cria um objeto do tipo Processo SEM ID.
-    	Processo processoEsperado = ProcessoUtil.processoSemID();
-    	
-    	boolean foiDeletado = processoService.deletarPeloId(processoEsperado.getId());
-    	
-    	// Testes para o processo que foi deletado sem Id válido.
+
+    	foiDeletado = processoService.deletarPeloId(null);
+
+    	// Testes para o processo que foi deletado.
     	Assertions.assertFalse(foiDeletado);
 	}
-//	 */
-//	@Test
-//	@DisplayName(value = "Deletar um processo pelo ID com id inválido.")
-//	void testDeletarPeloIdFalho() {
-//		// cria um objeto do tipo Processo SEM ID.
-//    	Processo processoEsperado = ProcessoUtil.processoSemID();
-//
-//    	boolean foiDeletado = processoService.deletarPeloId(processoEsperado.getId());
-//
-//    	// Testes para o processo que foi deletado sem Id válido.
-//    	Assertions.assertFalse(foiDeletado);
-//    	Assertions.fail("Informe um processo válido");
 
 }
