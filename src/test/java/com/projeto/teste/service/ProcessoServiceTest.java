@@ -36,6 +36,8 @@ class ProcessoServiceTest {
 	 // Quando for executado o save do repository, esse é executado tanto para salvar e atualizar processo.
         BDDMockito.when(processoRepository.save(ArgumentMatchers.any()))
                 .thenReturn(ProcessoUtil.processoValido());
+        
+        
         }
     
 	/**
@@ -69,7 +71,6 @@ class ProcessoServiceTest {
     	
     	// Testes para o processo que foi salvo.
     	Assertions.assertEquals(processoEsperado, processoSalvo);
-    	Assertions.fail("Informe um processo válido");
     	
 	}
 
@@ -101,7 +102,6 @@ class ProcessoServiceTest {
     	
     	// Testes para o processo que foi deletado sem Id válido.
     	Assertions.assertFalse(foiDeletado);
-    	Assertions.fail("Informe um processo válido");
 	}
 
 }

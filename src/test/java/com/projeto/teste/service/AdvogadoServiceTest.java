@@ -50,7 +50,7 @@ public class AdvogadoServiceTest {
     @DisplayName(value = "Salvar um advogado com sucesso")
     public void salvarAdvogadoQuandoValido() {
     	// cria um objeto do tipo Advogado.
-    	Advogado advogadoEsperado = AdvogadoUtil.advogadoParaSalvar();
+    	Advogado advogadoEsperado = AdvogadoUtil.advogadoValido();
     	
     	// retorna o advogado que foi salvo no banco.
     	Advogado advogadoSalvo = advogadoService.salvar(advogadoEsperado);
