@@ -9,6 +9,9 @@ e Teste de Software.
 - Spring Data JPA;
 - Springdoc OpenAPI UI
 - PostgreSQL;
+- Docker;
+- Junit 5;
+- JaCoCo (EclEmma);
 
 ### Execução com Docker
 Com o docker instalado na máquina, acesse a pasta
