@@ -12,9 +12,23 @@
 
 #RUN javac Main.java
 #CMD ["java", "-Dspring.profiles.active=dev", "-jar", "Projeto-Testes-0.0.1-SNAPSHOT.jar"]
-FROM eclipse-temurin:25
+FROM eclipse-temurin:8-jdk AS build
+
 WORKDIR /app
 
-COPY build/libs/*.jar app.jar
+COPY . .
 
-CMD ["java", "-jar", "app.jar"]
+RUN chmod +x gradlew
+
+RUN ./gradlew build -x test
+
+
+FROM eclipse-temurin:8-jre
+
+WORKDIR /app
+
+COPY --from=build /app/build/libs/*.jar app.jar
+
+EXPOSE 8080
+
+CMD ["sh", "-c", "java -jar app.jar --server.port=$PORT"]
