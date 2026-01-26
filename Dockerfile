@@ -7,7 +7,7 @@ COPY . .
 # por causa do banco de dados
 # RUN ./gradlew clean build -x test
 
-RUN chmod +x /build/libs/Projeto-Testes-0.0.1-SNAPSHOT.jar
+RUN mkdir /build/libs/ && chmod +x /build/libs/Projeto-Testes-0.0.1-SNAPSHOT.jar
 
 WORKDIR /build/libs
 
