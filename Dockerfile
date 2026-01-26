@@ -1,4 +1,5 @@
-FROM openjdk:8-alpine
+# FROM openjdk:8-alpine (deprecated)
+FROM eclipse-temurin:25
 
 COPY . .
 
