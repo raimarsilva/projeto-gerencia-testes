@@ -20,3 +20,6 @@ rodar o projeto.
 
     $ docker-compose build
     $ docker-compose up
+
+## Acesso
+https://projeto-gerencia-testes.onrender.com/swagger-ui/index.html#/
