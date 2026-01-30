@@ -1,34 +1,15 @@
-# FROM openjdk:8-alpine (deprecated)
-
-# COPY . .
-
-# Utilizar o -x test para retirar os testes na compilação, pois dará erro
-# por causa do banco de dados
-# RUN ./gradlew clean build -x test
-
-# RUN mkdir -p /build/libs/ && chmod +x /build/libs/Projeto-Testes-0.0.1-SNAPSHOT.jar
-
-#WORKDIR /build/libs
-
-#RUN javac Main.java
-#CMD ["java", "-Dspring.profiles.active=dev", "-jar", "Projeto-Testes-0.0.1-SNAPSHOT.jar"]
-FROM eclipse-temurin:8-jdk AS build
+#DEVKIT
+FROM eclipse-temurin:17-jdk-alpine AS build
 
 WORKDIR /app
-
 COPY . .
-
 RUN chmod +x gradlew
-
 RUN ./gradlew build -x test
 
-
-FROM eclipse-temurin:8-jre
+#RUNTIME
+FROM eclipse-temurin:17-jre-alpine
 
 WORKDIR /app
-
 COPY --from=build /app/build/libs/*.jar app.jar
-
-EXPOSE 8080
 
 CMD ["sh", "-c", "java -jar app.jar --server.port=$PORT"]
