@@ -18,7 +18,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .anyRequest().authenticated())
                 .formLogin(login -> login
                         .loginPage("/login")
-                        .defaultSuccessUrl("/home", true)   // 👈 AQUI
+                        .defaultSuccessUrl("/home", true)
                         .failureUrl("/login-error")
                         .permitAll())
                 .logout(logout -> logout
@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth
             .inMemoryAuthentication()
             .withUser("user")
-            .password("{noop}password")   // 👈 importante
+            .password("{noop}password")
             .roles("USER");
     }
 }
