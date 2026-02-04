@@ -1,0 +1,33 @@
+# Gradle
+.gradle
+build
+
+# IDE
+.vscode
+.idea
+*.iml
+
+# Git
+.git
+.gitignore
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Node (se existir)
+node_modules
+
+# Tests / docs
+**/src/test
+README.md
+
+# Docker
+Dockerfile
+docker-compose.yml
+
+**/target
+**/*.jar
