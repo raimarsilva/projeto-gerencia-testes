@@ -28,7 +28,3 @@ README.md
 # Docker
 Dockerfile
 docker-compose.yml
-
-**/target
-!/gradle/wrapper/gradle-wrapper.jar
-**/*.jar
