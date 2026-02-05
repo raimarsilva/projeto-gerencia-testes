@@ -13,7 +13,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests(requests -> requests
-                        .antMatchers("/", "/home", "/login", "/error", "/index", "/css/**").permitAll()
+                        .antMatchers("/", "/home", "/login", "/error", "/index", "/css/**", "/swagger-ui.html").permitAll()
                         .antMatchers("/user/**").hasRole("USER")
                         .anyRequest().authenticated())
                 .formLogin(login -> login

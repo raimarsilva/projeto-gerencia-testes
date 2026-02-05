@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Projeto Gerência Testes</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+<h1>CADASTRAR PROCESSO</h1>
+<!--
+<p>Backend Spring Boot rodando no Render.</p>
+
+<ul>
+    <li>Status: ONLINE</li>
+    <li>Banco: Supabase PostgreSQL</li>
+    <li>Deploy: Render</li>
+</ul>
+
+<p hidden="false">
+    <a href="/swagger-ui.html">Swagger</a>
+</p>-->
+
+<div class="registry-box">
+    <form th:action="@{/cadastrar}" method="post">
+        <input  type="text"
+                name="numProc"
+                placeholder="Número do processo"
+                required/>
+        <button type="submit">Cadastrar</button>
+    </form>
+</div>
+
+<div>
+    <h2>CONTRATOS CADASTRADOS</h2>
+    <p th:if="${contratos == null or contratos.isEmpty()}">Nenhum contrato cadastrado.</p>
+    <table>
+        <tr th:each="c : ${contratos}">
+            <td th:text="${c.numProc}"></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>
