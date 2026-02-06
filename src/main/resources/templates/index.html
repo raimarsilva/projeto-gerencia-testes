@@ -28,13 +28,56 @@
 
 <div class="registry-box">
     <form th:action="@{/cadastrar}" method="post">
-        <input  type="text"
-                name="numProc"
-                placeholder="Número do processo"
-                required/>
+
+        <input type="text" name="numProc" placeholder="Número do processo" required/>
+
+        <input type="number" name="anoContrato" placeholder="Ano do contrato" required/>
+        <input type="text" name="nome" placeholder="Nome" required/>
+        <input type="text" name="edital" placeholder="Edital" required/>
+        <input type="text" name="douEdital" placeholder="DOU Edital" required/>
+        <input type="date" name="dataDouEdital" required/>
+
+        <input type="text" name="assinante" placeholder="Assinante" required/>
+
+        <!-- Dados privados -->
+
+        <input type="text" name="estCivil" placeholder="Estado civil" required/>
+        <input type="text" name="nacionalidade" placeholder="Nacionalidade" required/>
+        <input type="text" name="rg" placeholder="RG" required/>
+        <input type="text" name="emissorRg" placeholder="Emissor RG" required/>
+
+        <input type="text" name="passaporte" placeholder="Passaporte"/>
+        <input type="text" name="emissorPassaporte" placeholder="Emissor Passaporte"/>
+
+        <input type="text" name="cpf" placeholder="CPF" required/>
+
+        <input type="text" name="logradouro" placeholder="Logradouro" required/>
+        <input type="text" name="endereco" placeholder="Endereço" required/>
+        <input type="text" name="enderecoNumero" placeholder="Número" required/>
+        <input type="text" name="enderecoComplemento" placeholder="Complemento"/>
+
+        <input type="text" name="enderecoBairro" placeholder="Bairro" required/>
+        <input type="text" name="enderecoCidade" placeholder="Cidade" required/>
+        <input type="text" name="enderecoEstado" placeholder="Estado" required/>
+
+        <!-- Dados funcionais -->
+
+        <input type="text" name="cargo" placeholder="Cargo" required/>
+        <input type="text" name="unidade" placeholder="Unidade" required/>
+        <input type="text" name="area" placeholder="Área" required/>
+        <input type="text" name="cargaHoraria" placeholder="Carga horária" required/>
+
+        <input type="number" step="0.01" name="remuneracao" placeholder="Remuneração" required/>
+        <input type="text" name="classe" placeholder="Classe" required/>
+        <input type="text" name="titulacao" placeholder="Titulação" required/>
+
+        <input type="date" name="dataAssinatura" required/>
+        <input type="date" name="dataVigencia" required/>
+
         <button type="submit">Cadastrar</button>
     </form>
 </div>
+
 
 <div>
     <h2>CONTRATOS CADASTRADOS</h2>
