@@ -6,8 +6,6 @@ import com.projeto.teste.ProjetoTestes.service.ContratoService;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +37,7 @@ public class ContratoController {
     @GetMapping(path = "/list")
     public List<Contrato> listarTodos(){
       List<Contrato> contratos = contratoService.listarTodos();
-        return contratos;
+      return contratos;
     }
 /*
     // Rota para listar todos
