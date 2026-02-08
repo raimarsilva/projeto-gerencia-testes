@@ -11,6 +11,9 @@
 
 <div sec:authorize="isAuthenticated()">
     Logado como: <span sec:authentication="name"></span>
+    <p>
+        <a href="/index">Cadastrar um contrato</a>
+    </p>
 </div>
 
 <div sec:authorize="!isAuthenticated()">
