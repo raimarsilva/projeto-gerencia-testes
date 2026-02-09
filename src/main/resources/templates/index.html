@@ -213,9 +213,30 @@
     <h2>CONTRATOS CADASTRADOS</h2>
     <p th:if="${contratos == null or contratos.isEmpty()}">Nenhum contrato cadastrado.</p>
     <table>
+      <thead>
+            <tr>
+                <th>Ano</th>
+                <th>Nº Processo</th>
+                <th>Nome</th>
+                <th>Cargo</th>
+                <th>Unidade</th>
+                <th>Carga Horária</th>
+                <th>Data Assinatura</th>
+                <th>Data Vigência</th>
+            </tr>
+        </thead>
+        <tbody>
         <tr th:each="c : ${contratos}">
+            <td th:text="${c.anoContrato}"></td>
             <td th:text="${c.numProc}"></td>
+            <td th:text="${c.nome}"></td>
+            <td th:text="${c.cargo}"></td>
+            <td th:text="${c.unidade}"></td>
+            <td th:text="${c.cargaHoraria}"></td>
+            <td th:text="${c.dataAssinatura}"></td>
+            <td th:text="${c.dataVigencia}"></td>
         </tr>
+        </tbody>
     </table>
 </div>
 <script th:src="@{/js/calc-vigencia.js}"></script>
