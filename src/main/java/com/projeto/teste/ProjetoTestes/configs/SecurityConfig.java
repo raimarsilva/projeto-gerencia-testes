@@ -28,7 +28,13 @@ public class SecurityConfig {
                                 "/swagger-ui.html").permitAll()
                                 .anyRequest().authenticated()
                         )
-                        .formLogin().and().logout();
+                        .formLogin(form -> form
+                          .defaultSuccessUrl("/home", true)
+                          .permitAll()
+                        )
+                        .logout(logout -> logout
+                          .logoutSuccessUrl("/login")
+                        );
 
                 return http.build();
         }
@@ -43,35 +49,4 @@ public class SecurityConfig {
 
                 return new InMemoryUserDetailsManager(user);
         }
-
-    /*
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests(requests -> requests
-                        .antMatchers("/", "/home", "/login", "/error", "/index", "/css/**", "/swagger-ui.html").permitAll()
-                        .antMatchers("/user/**").hasRole("USER")
-                        .anyRequest().authenticated())
-                .formLogin(login -> login
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/home", true)
-                        .failureUrl("/login-error")
-                        .permitAll())
-                .logout(logout -> logout
-                        .logoutSuccessUrl("/login?logout")
-                        .permitAll());
-    }
-*/
-
-
-/*
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-            .inMemoryAuthentication()
-            .withUser("user")
-            .password("{noop}password")
-            .roles("USER");
-    }
-    */
 }
