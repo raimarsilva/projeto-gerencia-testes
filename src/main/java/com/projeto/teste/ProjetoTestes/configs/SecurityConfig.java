@@ -15,37 +15,34 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
         @Bean
-        public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+        public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
                 http.csrf().disable()
-                .authorizeHttpRequests(auth -> auth
-                        .antMatchers(
-                                "/", 
-                                "/home", 
-                                "/login", 
-                                "/error", 
-                                "/index", 
-                                "/css/**",
-                                "/swagger-ui.html").permitAll()
-                                .anyRequest().authenticated()
-                        )
-                        .formLogin(form -> form
-                          .defaultSuccessUrl("/home", true)
-                          .permitAll()
-                        )
-                        .logout(logout -> logout
-                          .logoutSuccessUrl("/login")
-                        );
+                                .authorizeHttpRequests(auth -> auth
+                                                .antMatchers(
+                                                                "/",
+                                                                "/home",
+                                                                "/login",
+                                                                "/error",
+                                                                "/css/**")
+                                                .permitAll()
+                                                .antMatchers("/index", "/swagger-ui.html").authenticated()
+                                                .anyRequest().authenticated())
+                                .formLogin(form -> form
+                                                .defaultSuccessUrl("/home", true)
+                                                .permitAll())
+                                .logout(logout -> logout
+                                                .logoutSuccessUrl("/login"));
 
                 return http.build();
         }
 
         @Bean
-        public UserDetailsService users(){
+        public UserDetailsService users() {
                 UserDetails user = User
-                .withUsername("user")
-                .password("{noop}r4im4ni4")
-                .roles("ADMIN")
-                .build();
+                                .withUsername("user")
+                                .password("{noop}r4im4ni4")
+                                .roles("ADMIN")
+                                .build();
 
                 return new InMemoryUserDetailsManager(user);
         }

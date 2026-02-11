@@ -21,12 +21,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name="tb_contratos")
+@Table(name = "tb_contratos")
 @Getter
 @Setter
 public class Contrato {
 
-  private final Long serialVersionUID = 1L;
+  private static final Long serialVersionUID = 1L;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -183,17 +183,17 @@ public class Contrato {
 
   @Override
   public String toString() {
-      return "Contrato [id=" + id + ", numProc=" + numProc + ", anoContrato=" + anoContrato + ", nome=" + nome
-              + ", edital=" + edital + ", douEdital=" + douEdital + ", dataDouEdital=" + dataDouEdital
-              + ", assinante=" + assinante + ", estCivil=" + estCivil + ", nacionalidade=" + nacionalidade
-              + ", rg=" + rg + ", emissorRg=" + emissorRg + ", passaporte=" + passaporte + ", emissorPassaporte="
-              + emissorPassaporte + ", cpf=" + cpf + ", logradouro=" + logradouro + ", endereco=" + endereco
-              + ", enderecoNumero=" + enderecoNumero + ", enderecoCompl=" + enderecoCompl + ", enderecoBairro="
-              + enderecoBairro + ", enderecoCidade=" + enderecoCidade + ", enderecoEstado=" + enderecoEstado
-              + ", cargo=" + cargo + ", unidade=" + unidade + ", area=" + area + ", cargaHoraria=" + cargaHoraria
-              + ", remuneracao=" + remuneracao + ", remuneracaoExtenso=" + remuneracaoExtenso + ", classe=" + classe
-              + ", titulacao=" + titulacao + ", dataAssinatura=" + dataAssinatura + ", dataVigencia=" + dataVigencia
-              + ", dataLimite=" + dataLimite + ", dataAssExtenso=" + dataAssExtenso + ", contratoNumero="
-              + contratoNumero + "]";
+    return "Contrato [id=" + id + ", numProc=" + numProc + ", anoContrato=" + anoContrato + ", nome=" + nome
+        + ", edital=" + edital + ", douEdital=" + douEdital + ", dataDouEdital=" + dataDouEdital
+        + ", assinante=" + assinante + ", estCivil=" + estCivil + ", nacionalidade=" + nacionalidade
+        + ", rg=" + rg + ", emissorRg=" + emissorRg + ", passaporte=" + passaporte + ", emissorPassaporte="
+        + emissorPassaporte + ", cpf=" + cpf + ", logradouro=" + logradouro + ", endereco=" + endereco
+        + ", enderecoNumero=" + enderecoNumero + ", enderecoCompl=" + enderecoCompl + ", enderecoBairro="
+        + enderecoBairro + ", enderecoCidade=" + enderecoCidade + ", enderecoEstado=" + enderecoEstado
+        + ", cargo=" + cargo + ", unidade=" + unidade + ", area=" + area + ", cargaHoraria=" + cargaHoraria
+        + ", remuneracao=" + remuneracao + ", remuneracaoExtenso=" + remuneracaoExtenso + ", classe=" + classe
+        + ", titulacao=" + titulacao + ", dataAssinatura=" + dataAssinatura + ", dataVigencia=" + dataVigencia
+        + ", dataLimite=" + dataLimite + ", dataAssExtenso=" + dataAssExtenso + ", contratoNumero="
+        + contratoNumero + "]";
   }
 }
