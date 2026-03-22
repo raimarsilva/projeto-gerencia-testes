@@ -1,7 +1,7 @@
 package com.projeto.teste.ProjetoTestes.controller;
 
 import com.projeto.teste.ProjetoTestes.model.Contrato;
-import com.projeto.teste.ProjetoTestes.model.Departamento;
+import com.projeto.teste.ProjetoTestes.model.Unidade;
 import com.projeto.teste.ProjetoTestes.service.ContratoService;
 
 import java.util.List;
@@ -22,8 +22,9 @@ public class ContratoController {
 
   @GetMapping({ "", "/", "/index" })
   public String index(Model model) {
+    model.addAttribute("contrato", new Contrato());
     model.addAttribute("contratos", contratoService.listarTodos());
-    model.addAttribute("departamento", Departamento.values());
+    model.addAttribute("unidades", Unidade.values());
     return "index";
   }
 

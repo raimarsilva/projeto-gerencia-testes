@@ -9,7 +9,7 @@
   <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      new TomSelect("#departamento", {
+      new TomSelect("#unidade", {
         create: false,
         sortField: {
           field: "text",
@@ -27,7 +27,7 @@
       <h1>CADASTRAR CONTRATO</h1>
       <button sec:authorize="isAuthenticated()" onclick="window.location.href='/logout'">Sair</button>
     </div>
-    <form th:action="@{/cadastrar}" method="post" class="form-grid">
+    <form th:action="@{/cadastrar}" th:object="${contrato}" method="post" class="form-grid">
 
       <!-- ================= DADOS DO CONTRATO ================= -->
       <div class="section-title">Dados do Contrato</div>
@@ -207,9 +207,9 @@
 
       <div class="form-group">
         <label for="unidade">Unidade</label>
-        <select class="depto" id="departamento" th:field="*{departamento}" maxlength="30" required>
+        <select class="depto" id="unidade" th:field="*{unidade}" name="unidade" maxlength="30" required>
           <option value="" disabled>Selecione...</option>
-          <option th:each="d : ${departamento}" th:value="${d}" th:text="${d.descricao}"></option>
+          <option th:each="u : ${unidades}" th:value="${u.getDescricao()}" th:text="${u.descricao}"></option>
         </select>
       </div>
 
