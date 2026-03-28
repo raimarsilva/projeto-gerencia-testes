@@ -8,15 +8,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    private static final Logger log =
-            LoggerFactory.getLogger(GlobalExceptionHandler.class);
+  private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-    @ExceptionHandler(Exception.class)
-    public String handle(Exception ex) {
+  @ExceptionHandler(Exception.class)
+  public String handle(Exception ex) {
 
-        log.error("Erro capturado: {}", ex.getMessage());
+    log.error("Erro capturado: {}", ex.getMessage(), ex);
 
-        return "Erro interno. Consulte o administrador.";
-    }
+    return "Erro interno. Consulte o administrador.";
+  }
 }
-
