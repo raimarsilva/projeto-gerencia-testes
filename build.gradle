@@ -17,7 +17,7 @@ jacoco {
 // Caminho $buildDir/reports/jacoco/test e abrir o index.html
 
 group = 'com.projeto.teste'
-version = '0.0.1-SNAPSHOT'
+version = '0.1.93'
 
 configurations {
 	compileOnly {
