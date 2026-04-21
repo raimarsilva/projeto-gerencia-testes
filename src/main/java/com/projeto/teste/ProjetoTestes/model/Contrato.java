@@ -26,6 +26,7 @@ import lombok.Setter;
 @Setter
 public class Contrato {
 
+  @SuppressWarnings("unused")
   private static final Long serialVersionUID = 1L;
 
   @Id
@@ -184,16 +185,15 @@ public class Contrato {
   @Override
   public String toString() {
     return "Contrato [id=" + id + ", numProc=" + numProc + ", anoContrato=" + anoContrato + ", nome=" + nome
-        + ", edital=" + edital + ", douEdital=" + douEdital + ", dataDouEdital=" + dataDouEdital
-        + ", assinante=" + assinante + ", estCivil=" + estCivil + ", nacionalidade=" + nacionalidade
-        + ", rg=" + rg + ", emissorRg=" + emissorRg + ", passaporte=" + passaporte + ", emissorPassaporte="
-        + emissorPassaporte + ", cpf=" + cpf + ", logradouro=" + logradouro + ", endereco=" + endereco
-        + ", enderecoNumero=" + enderecoNumero + ", enderecoCompl=" + enderecoCompl + ", enderecoBairro="
-        + enderecoBairro + ", enderecoCidade=" + enderecoCidade + ", enderecoEstado=" + enderecoEstado
-        + ", cargo=" + cargo + ", unidade=" + unidade + ", area=" + area + ", cargaHoraria=" + cargaHoraria
-        + ", remuneracao=" + remuneracao + ", remuneracaoExtenso=" + remuneracaoExtenso + ", classe=" + classe
-        + ", titulacao=" + titulacao + ", dataAssinatura=" + dataAssinatura + ", dataVigencia=" + dataVigencia
-        + ", dataLimite=" + dataLimite + ", dataAssExtenso=" + dataAssExtenso + ", contratoNumero="
-        + contratoNumero + "]";
+        + ", edital=" + edital + ", douEdital=" + douEdital + ", dataDouEdital=" + dataDouEdital + ", assinante="
+        + assinante + ", estCivil=" + estCivil + ", nacionalidade=" + nacionalidade + ", rg=" + rg + ", emissorRg="
+        + emissorRg + ", passaporte=" + passaporte + ", emissorPassaporte=" + emissorPassaporte + ", cpf=" + cpf
+        + ", logradouro=" + logradouro + ", endereco=" + endereco + ", enderecoNumero=" + enderecoNumero
+        + ", enderecoCompl=" + enderecoCompl + ", enderecoBairro=" + enderecoBairro + ", enderecoCidade="
+        + enderecoCidade + ", enderecoEstado=" + enderecoEstado + ", cargo=" + cargo + ", unidade=" + unidade
+        + ", area=" + area + ", cargaHoraria=" + cargaHoraria + ", remuneracao=" + remuneracao + ", remuneracaoExtenso="
+        + remuneracaoExtenso + ", classe=" + classe + ", titulacao=" + titulacao + ", dataAssinatura=" + dataAssinatura
+        + ", dataVigencia=" + dataVigencia + ", dataLimite=" + dataLimite + ", dataAssExtenso=" + dataAssExtenso
+        + ", contratoNumero=" + contratoNumero + "]";
   }
 }

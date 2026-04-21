@@ -1,10 +1,33 @@
 package com.projeto.teste.ProjetoTestes.model;
 
-public enum Salary {
-  T20G(3000), T20E(3200), T20M(3400), T20D(3800),
-  T40G(5000), T40E(5200), T40M(5400), T40D(5800),
-  VJ(10000), VA(12000), VT(14000);
+import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Entity
+@Getter
+@Setter
+public class Salary {
+
+  @Id
+  private int id;
+
+  @Column
+  private boolean active;
+
+  @Column
+  @DateTimeFormat(iso = ISO.DATE)
+  private LocalDate createdDate;
+
+  @Column
   private final double value;
 
   Salary(double value) {
