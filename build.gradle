@@ -50,6 +50,9 @@ dependencies {
 	// external library for converting numbers to words
 	implementation 'pl.allegro.finance:tradukisto:4.3.2'
 
+	// Auth0
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+	implementation 'com.nimbusds:nimbus-jose-jwt:9.31'
 }
 
 tasks.named('test') {
