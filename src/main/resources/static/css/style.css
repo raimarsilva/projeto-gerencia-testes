@@ -70,7 +70,7 @@ input {
     height: fit-content;
     width: auto;
     padding: 4px;
-    margin: 0;
+    margin-bottom: clamp(4px, 1vw, 8px);
 }
 
 select {

@@ -5,16 +5,20 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@NoArgsConstructor
 @Getter
 @Setter
+@Table(name = "salary")
 public class Salary {
 
   @Id
@@ -28,7 +32,7 @@ public class Salary {
   private LocalDate createdDate;
 
   @Column
-  private final double value;
+  private double value;
 
   Salary(double value) {
     this.value = value;
