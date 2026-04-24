@@ -242,8 +242,13 @@
 
       <div class="form-group">
         <label for="remuneracao">Remuneração</label>
-        <input type="number" step="0.01" id="remuneracao" name="remuneracao" placeholder="Ex: 5432,19" min="1600"
-          max="47000.99" pattern="^\d+,\d{2}$" required>
+        <!-- <input type="number" step="0.01" id="remuneracao" name="remuneracao" placeholder="Ex: 5432,19" min="1600"
+          max="47000.99" pattern="^\d+,\d{2}$" required> -->
+        <select>
+          <option th:each="s : ${salarios}" th:value="${s.getValue()}"
+            th:text="'R$ ' + ${#numbers.formatDecimal(s.getValue(), 1, 'POINT', 2, 'COMMA')}">
+          </option>
+        </select>
       </div>
 
       <div class="form-group">
