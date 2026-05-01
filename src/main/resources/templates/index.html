@@ -60,7 +60,9 @@
 
       <div class="form-group">
         <label for="assinante">Assinante</label>
-        <input type="text" id="assinante" name="assinante" placeholder="Nome do assinante" maxlength="70" required>
+        <select type="text" id="assinante" name="assinante" required>
+          <option>Selecione...</option>
+        </select>
       </div>
 
       <!-- ================= DADOS PESSOAIS ================= -->
@@ -193,15 +195,16 @@
 
       <div class="form-group">
         <label for="cargo">Cargo</label>
-        <select id="cargo" name="cargo" placeholder="Professor Substituto" required>
+        <select id="cargo" name="cargo" placeholder="Professor Substituto" required
+          onchange="mudarClasse(); mudarSalario()">
           <option value="" disabled selected>Selecione...</option>
           <option value="Professor do Magistério Superior - Substituto">Professor Substituto</option>
           <option value="Professor do Ensino Básico, Técnico e Tecnológico - Substituto">Professor EBTT Substituto
           </option>
           <option value="Professor Temporário">Professor Temporário</option>
-          <option value="Professor Visitante Adjunto">Professor Visitante - Júnior (Adjunto)</option>
-          <option value="Professor Visitante Associado">Professor Visitante - Júnior (Associado)</option>
-          <option value="Professor Visitante Titular">Professor Visitante - Sênior (Titular)</option>
+          <option value="Professor Visitante Adjunto">Professor Visitante Adjunto (Júnior)</option>
+          <option value="Professor Visitante Associado">Professor Visitante Associado (Júnior)</option>
+          <option value="Professor Visitante Titular">Professor Visitante Titular (Sênior)</option>
         </select>
       </div>
 
@@ -220,8 +223,7 @@
 
       <div class="form-group">
         <label for="cargaHoraria">Carga horária</label>
-        <select type="number" id="cargaHoraria" name="cargaHoraria" placeholder="Horas semanais" required
-          onchange="mudarSalario()">
+        <select id="cargaHoraria" name="cargaHoraria" placeholder="Horas semanais" required onchange="mudarSalario()">
           <option value="" disabled selected>Selecione...</option>
           <option value="20">20 horas</option>
           <option value="40">40 horas</option>
@@ -249,12 +251,13 @@
         <label for="remuneracao">Remuneração:</label>
         <label id="remun" th:text="${#numbers.formatDecimal(salarios[0].value, 1, 'POINT', 2, 'COMMA')}">
         </label>
-        <input type="hidden" id="remInput" name="value" th:value="${salarios[0].value}"></input>
+        <input type="hidden" id="remInput" name="remuneracao"></input>
       </div>
 
       <div class="form-group">
-        <label for="classe">Classe</label>
-        <input type="text" id="classe" name="classe" placeholder="Classe funcional" maxlength="10" required>
+        <label for="classe">Classe:</label>
+        <input type="text" id="classe" name="classe" placeholder="Classe funcional" maxlength="10" required
+          style="color: midnightblue; border-style: hidden;" readonly>
       </div>
 
       <div class="form-group">

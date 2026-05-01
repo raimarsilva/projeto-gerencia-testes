@@ -11,11 +11,6 @@ jacoco {
 	toolVersion = "0.8.7"
 }
 
-// Execute
-// ./gradlew build
-// ./gradlew jacocoTestReport
-// Caminho $buildDir/reports/jacoco/test e abrir o index.html
-
 group = 'com.projeto.teste'
 version = '0.1.93'
 
@@ -40,9 +35,6 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-	// Disponibilizando o banco de dados h2 in-memory para test
-	testRuntimeOnly 'com.h2database:h2'
-
 	// Thymeleaf with security
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
@@ -52,7 +44,6 @@ dependencies {
 
 	// Auth0
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
-	implementation 'com.nimbusds:nimbus-jose-jwt:9.31'
 }
 
 tasks.named('test') {
