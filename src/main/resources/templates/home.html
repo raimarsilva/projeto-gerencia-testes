@@ -7,8 +7,10 @@
 </head>
 
 <body>
-
     <h1>Home</h1>
+    <p th:if="${contratos == null or contratos.isEmpty()}">Nenhum contrato cadastrado.</p>
+
+    <div th:replace="fragments/lista-contratos"></div>
 
     <div sec:authorize="isAuthenticated()">
         Logado como: <span sec:authentication="name"></span>
