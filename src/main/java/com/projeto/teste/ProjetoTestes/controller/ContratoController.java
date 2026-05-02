@@ -24,23 +24,20 @@ public class ContratoController {
   @GetMapping({ "", "/", "/index" })
   public String index(Model model) {
     model.addAttribute("contrato", new Contrato());
-    model.addAttribute("contratos", contratoService.listarTodos());
     model.addAttribute("unidades", Unidade.values());
     model.addAttribute("salarios", salaryService.listarTodos());
     return "index";
   }
 
-  // Rota para salvar
+  @GetMapping({ "/home" })
+  public String home(Model model) {
+    model.addAttribute("contratos", contratoService.listarTodos());
+    return "home";
+  }
+
   @PostMapping(path = "/cadastrar")
   public String salvar(@ModelAttribute Contrato contrato) {
     contratoService.salvar(contrato);
     return "redirect:/";
-  }
-
-  // Rota para listar todos
-  @GetMapping(path = "/list")
-  public List<Contrato> listarTodos() {
-    List<Contrato> contratos = contratoService.listarTodos();
-    return contratos;
   }
 }
