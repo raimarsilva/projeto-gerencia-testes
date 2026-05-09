@@ -20,9 +20,17 @@ public class RestConfig {
 
   @Bean(name = "stringTemplateEngine")
   public TemplateEngine stringTemplateEngine() {
+
     TemplateEngine templateEngine = new TemplateEngine();
+
     StringTemplateResolver resolver = new StringTemplateResolver();
+
+    resolver.setTemplateMode("HTML");
+
+    resolver.setCacheable(false);
+
     templateEngine.setTemplateResolver(resolver);
+
     return templateEngine;
   }
 }
