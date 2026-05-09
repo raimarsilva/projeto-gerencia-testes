@@ -47,6 +47,8 @@ dependencies {
 
 	// html to pdf generator
 	implementation 'com.openhtmltopdf:openhtmltopdf-pdfbox:1.0.10'
+
+	implementation 'ognl:ognl:3.1.26'
 }
 
 tasks.named('test') {

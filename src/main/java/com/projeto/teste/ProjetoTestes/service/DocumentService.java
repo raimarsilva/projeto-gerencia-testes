@@ -1,8 +1,8 @@
 package com.projeto.teste.ProjetoTestes.service;
 
 import java.io.ByteArrayOutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
-
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import com.projeto.teste.ProjetoTestes.model.Contrato;
 
@@ -24,22 +23,22 @@ public class DocumentService {
   @Qualifier("stringTemplateEngine")
   private TemplateEngine te;
 
-  @Value("${SUPABASE_URL}")
-  private String dburl;
+  @Value("${GDRIVE_FILE_URL}")
+  private String fileurl;
 
   public byte[] generateFromDB(Optional<Contrato> contrato) throws Exception {
+    if (fileurl == null || contrato.isEmpty()) {
+      return new byte[0];
+    }
 
-    String docurl = dburl
-        + "/storage/v1/object/sign/documents/contrato.html?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9mYjVhNjUxMi1iMGVlLTQyOGQtYTU0OS0yODY5ZGM5NWViMjEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJkb2N1bWVudHMvY29udHJhdG8uaHRtbCIsImlhdCI6MTc3NzkyNDA0OSwiZXhwIjoxODA5NDYwMDQ5fQ.GRiHD-njRZVNt20UrtlHgoEZixKlh7Qy1Q7UaqlUpW4";
+    byte[] responseBytes = rest.getForObject(fileurl, byte[].class);
+    String htmlpuro = new String(responseBytes, StandardCharsets.UTF_8);
 
-    // faz um GET nesse endereço a fim de recuperar o documento armazanado no banco.
-    String completeurl = rest.getForObject(docurl, String.class);
-
-    // cria um contexto thymeleaf.
     Context context = new Context();
-    context.setVariable("contrato", contrato);
 
-    String htmlProcessed = te.process(completeurl, context);
+    context.setVariable("contrato", contrato.get());
+
+    String htmlProcessed = te.process(htmlpuro, context);
 
     ByteArrayOutputStream out = new ByteArrayOutputStream();
     PdfRendererBuilder builder = new PdfRendererBuilder();
