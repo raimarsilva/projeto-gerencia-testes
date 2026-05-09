@@ -19,7 +19,7 @@ public class SecurityConfig {
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(
-            auth -> auth.antMatchers("/login", "/error", "/css/**").permitAll().anyRequest().authenticated())
+            auth -> auth.antMatchers("/login", "/error", "/css/**", "/gerar").permitAll().anyRequest().authenticated())
         .formLogin(form -> form.loginPage("/login").defaultSuccessUrl("/home", true).permitAll())
         .logout(logout -> logout.logoutSuccessUrl("/login").deleteCookies("JSESSIONID"));
 
