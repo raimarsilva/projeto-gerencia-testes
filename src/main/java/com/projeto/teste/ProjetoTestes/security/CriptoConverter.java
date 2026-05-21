@@ -1,8 +1,11 @@
 package com.projeto.teste.ProjetoTestes.security;
 
+import java.nio.ByteBuffer;
+import java.security.SecureRandom;
 import java.util.Base64;
 
 import javax.crypto.Cipher;
+import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
@@ -10,24 +13,25 @@ import javax.persistence.Converter;
 @Converter
 public class CriptoConverter implements AttributeConverter<String, String> {
 
-  private static final String TRANSFORMATION = "AES/ECB/PKCS5Padding";
+  private static final String TRANSFORMATION = "AES/GCM/NoPadding";
   private static final String ENV_KEY = "DB_CRIPTO_KEY";
+
+  private static final int IV_BYTE_LENGTH = 12;
+  private static final int TAG_BIT_LENGTH = 128;
+
+  private final SecureRandom secureRandom = new SecureRandom();
 
   private SecretKeySpec getKey() {
     String secret = System.getenv(ENV_KEY);
 
     if (secret == null || secret.isBlank()) {
-      throw new IllegalStateException(
-          "Variável de ambiente DB_CRIPTO_KEY não definida"
-      );
+      throw new IllegalStateException("Chave pública não encontrada.");
     }
 
     byte[] key = secret.getBytes();
 
     if (key.length != 16 && key.length != 24 && key.length != 32) {
-      throw new IllegalStateException(
-          "DB_CRIPTO_KEY deve ter 16, 24 ou 32 bytes (AES)"
-      );
+      throw new IllegalStateException("Chave pública deve ter 16, 24 ou 32 bytes");
     }
 
     return new SecretKeySpec(key, "AES");
@@ -40,10 +44,18 @@ public class CriptoConverter implements AttributeConverter<String, String> {
     }
 
     try {
+      byte[] iv = new byte[IV_BYTE_LENGTH];
+      secureRandom.nextBytes(iv);
+
       Cipher cipher = Cipher.getInstance(TRANSFORMATION);
-      cipher.init(Cipher.ENCRYPT_MODE, getKey());
-      return Base64.getEncoder()
-                   .encodeToString(cipher.doFinal(attribute.getBytes()));
+      GCMParameterSpec gcmParameterSpec = new GCMParameterSpec(TAG_BIT_LENGTH, iv);
+      cipher.init(Cipher.ENCRYPT_MODE, getKey(), gcmParameterSpec);
+
+      byte[] encryptedData = cipher.doFinal(attribute.getBytes());
+
+      byte[] encryptedBuffer = ByteBuffer.allocate(iv.length + encryptedData.length).put(iv).put(encryptedData).array();
+
+      return Base64.getEncoder().encodeToString(encryptedBuffer);
     } catch (Exception e) {
       throw new RuntimeException("Erro ao criptografar atributo", e);
     }
@@ -56,11 +68,20 @@ public class CriptoConverter implements AttributeConverter<String, String> {
     }
 
     try {
+      byte[] encryptedBuffer = Base64.getDecoder().decode(dbData);
+
+      ByteBuffer buffer = ByteBuffer.wrap(encryptedBuffer);
+      byte[] iv = new byte[IV_BYTE_LENGTH];
+      buffer.get(iv);
+
+      byte[] encryptedData = new byte[buffer.remaining()];
+      buffer.get(encryptedData);
+
       Cipher cipher = Cipher.getInstance(TRANSFORMATION);
-      cipher.init(Cipher.DECRYPT_MODE, getKey());
-      return new String(
-          cipher.doFinal(Base64.getDecoder().decode(dbData))
-      );
+      GCMParameterSpec gcmParameterSpec = new GCMParameterSpec(TAG_BIT_LENGTH, iv);
+      cipher.init(Cipher.DECRYPT_MODE, getKey(), gcmParameterSpec);
+
+      return new String(cipher.doFinal(encryptedData));
     } catch (Exception e) {
       throw new RuntimeException("Erro ao descriptografar atributo", e);
     }
