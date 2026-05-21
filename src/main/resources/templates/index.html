@@ -25,7 +25,11 @@
   <div class="registry-box">
     <div class="title">
       <h1>CADASTRAR CONTRATO</h1>
-      <button sec:authorize="isAuthenticated()" onclick="window.location.href='/logout'">Sair</button>
+      <th:block sec:authorize="isAuthenticated()">
+        <form th:action="@{/logout}" method="post">
+          <button type="submit" class="link-style">Sair</button>
+        </form>
+      </th:block>
     </div>
     <form th:action="@{/cadastrar}" th:object="${contrato}" method="post" class="form-grid">
 
