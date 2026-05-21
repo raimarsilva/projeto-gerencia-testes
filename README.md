@@ -3,15 +3,15 @@ Projeto simples para a disciplina de Gerência de Configuração
 e Teste de Software.
 
 ## Tecnologias
-- Java 8;
-- Spring Boot 2;
-- Spring Web;
-- Spring Data JPA;
+- Java 17
+- Spring Boot
+- Spring Web
+- Spring Data JPA
 - Springdoc OpenAPI UI
-- PostgreSQL;
-- Docker;
-- Junit 5;
-- JaCoCo (EclEmma);
+- PostgreSQL
+- Docker
+- Junit 5
+- JaCoCo (EclEmma)
 
 ### Execução com Docker
 Com o docker instalado na máquina, acesse a pasta
