@@ -1,14 +1,14 @@
 version: '2'
 services:
   app:
-    image: 'app_projeto_teste'
+    image: 'foo'
     build: .
     ports:
       - 8080:8080
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/bd_projeto_teste1
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_DATASOURCE_URL=jdbc:postgresql
+      - SPRING_DATASOURCE_USERNAME=foo
+      - SPRING_DATASOURCE_PASSWORD=foo
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     depends_on:
       - db
@@ -16,14 +16,14 @@ services:
     image: postgres:latest
     restart: always
     ports:
-      - 5432:5432
+      - foo:foo
     environment:
-      - POSTGRES_DB=bd_projeto_teste1
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=foo
+      - POSTGRES_USER=foo
+      - POSTGRES_PASSWORD=foo
   # Clinte db
   cloudbeaver:
     image: dbeaver/cloudbeaver:latest
     restart: always
     ports:
-      - 8978:8978
+      - foo:foo
