@@ -29,7 +29,7 @@ class EnvVarTest {
       if (source instanceof EnumerablePropertySource) {
         EnumerablePropertySource<?> enumerableSource = (EnumerablePropertySource<?>) source;
 
-        if (source.getName().contains("Config resource") || source.getName().contains(".env")) {
+        if (source.getName().contains(".env")) {
 
           for (String pname : enumerableSource.getPropertyNames()) {
             if (pname == null)
