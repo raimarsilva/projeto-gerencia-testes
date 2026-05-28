@@ -16,7 +16,7 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(Exception.class)
   public String handle(Exception e) {
 
-    log.error("Erro capturado: {}", e.getMessage()/* ,e */);
+    log.error("Erro capturado: {}", e.getMessage(), e);
 
     log.error("Causas: {}", getCauses(e));
 
