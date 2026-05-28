@@ -10,19 +10,28 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 @Converter
+@Component
 public class CriptoConverter implements AttributeConverter<String, String> {
 
   private static final String TRANSFORMATION = "AES/GCM/NoPadding";
-  private static final String ENV_KEY = "DB_CRIPTO_KEY";
+  private static String secretKey;
 
   private static final int IV_BYTE_LENGTH = 12;
   private static final int TAG_BIT_LENGTH = 128;
 
   private final SecureRandom secureRandom = new SecureRandom();
 
+  @Value("${DB_CRIPTO_KEY:}")
+  public void setSecretKey(String key){
+    CriptoConverter.secretKey = key;
+  }
+
   private SecretKeySpec getKey() {
-    String secret = System.getenv(ENV_KEY);
+    String secret = secretKey;
 
     if (secret == null || secret.isBlank()) {
       throw new IllegalStateException("Chave pública não encontrada.");
