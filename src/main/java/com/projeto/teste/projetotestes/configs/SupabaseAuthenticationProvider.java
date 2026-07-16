@@ -1,4 +1,4 @@
-package com.projeto.teste.ProjetoTestes.configs;
+package com.projeto.teste.projetotestes.configs;
 
 import java.util.Collections;
 import java.util.Map;

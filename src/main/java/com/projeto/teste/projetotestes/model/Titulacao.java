@@ -1,13 +1,14 @@
-package com.projeto.teste.ProjetoTestes.model;
+package com.projeto.teste.projetotestes.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class CargaHoraria {
+public class Titulacao {
   @Id
   int id;
+
   @Column
-  int type;
+  String titulo;
 }
