@@ -21,263 +21,265 @@
 </head>
 
 <body>
+  <main>
+    <div class="registry-box">
+      <div class="title">
+        <h1>CADASTRAR CONTRATO</h1>
+        <th:block sec:authorize="isAuthenticated()">
+          <form th:action="@{/logout}" method="post">
+            <button type="submit" class="link-style">Sair</button>
+          </form>
+        </th:block>
+      </div>
+      <form th:action="@{/cadastrar}" th:object="${contrato}" method="post" class="form-grid">
 
-  <div class="registry-box">
-    <div class="title">
-      <h1>CADASTRAR CONTRATO</h1>
-      <th:block sec:authorize="isAuthenticated()">
-        <form th:action="@{/logout}" method="post">
-          <button type="submit" class="link-style">Sair</button>
-        </form>
-      </th:block>
+        <!-- ================= DADOS DO CONTRATO ================= -->
+        <div class="section-title">Dados do Contrato</div>
+
+        <div class="form-group">
+          <label for="anoContrato">Ano do contrato</label>
+          <input type="number" id="anoContrato" name="anoContrato" th:value="${#dates.year(#dates.createNow())}"
+            placeholder="Ano atual" readonly>
+        </div>
+
+        <div class="form-group">
+          <label for="numProc">Nº Processo</label>
+          <input type="text" id="numProc" name="numProc" placeholder="Ex: 23077/2026" maxlength="12" required>
+        </div>
+
+        <div class="form-group">
+          <label for="edital">Edital</label>
+          <input type="text" id="edital" name="edital" placeholder="Número do edital" maxlength="3" required>
+        </div>
+
+        <div class="form-group">
+          <label for="douEdital">DOU Edital</label>
+          <input type="text" id="douEdital" name="douEdital" placeholder="DOU do edital" maxlength="3" required>
+        </div>
+
+        <div class="form-group">
+          <label for="dataDouEdital">Data DOU Edital</label>
+          <input type="date" id="dataDouEdital" name="dataDouEdital" required>
+        </div>
+
+        <div class="form-group">
+          <label for="assinante">Assinante</label>
+          <select type="text" id="assinante" name="assinante" required>
+            <option>Selecione...</option>
+          </select>
+        </div>
+
+        <!-- ================= DADOS PESSOAIS ================= -->
+        <div class="section-title">Dados Pessoais</div>
+
+        <div class="form-group">
+          <label for="nome">Nome do professor</label>
+          <input type="text" id="nome" name="nome" placeholder="Nome completo" maxlength="70"
+            oninput="this.value = this.value.toUpperCase();" required>
+        </div>
+
+        <div class="form-group">
+          <label for="cpf">CPF</label>
+          <input type="text" id="cpf" name="cpf" placeholder="somente numeros" maxlength="11" required>
+        </div>
+
+        <div class="form-group">
+          <label for="estCivil">Estado civil</label>
+          <select id="estCivil" name="estCivil" required>
+            <option value="" disabled selected>Selecione...</option>
+            <option value="Solteiro(a)">Solteiro(a)</option>
+            <option value="União Estável">União Estável</option>
+            <option value="Casado(a)">Casado(a)</option>
+            <option value="Divorciado(a)">Divorciado(a)</option>
+            <option value="Viúvo(a)">Viúvo(a)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="nacionalidade">Nacionalidade</label>
+          <input type="text" id="nacionalidade" name="nacionalidade" placeholder="Brasileira" maxlength="20" required>
+        </div>
+
+        <div class="form-group">
+          <label for="rg">RG</label>
+          <input type="text" id="rg" name="rg" placeholder="Ex: 123456789-0" maxlength="20" required>
+        </div>
+
+        <div class="form-group">
+          <label for="emissorRg">Emissor RG</label>
+          <input type="text" id="emissorRg" name="emissorRg" placeholder="SSP/UF, ITEP/UF..."
+            oninput="this.value = this.value.toUpperCase();" maxlength="10" required>
+        </div>
+
+        <div class="form-group">
+          <label for="passaporte">Passaporte</label>
+          <input type="text" id="passaporte" name="passaporte" placeholder="Número do passaporte" maxlength="20">
+        </div>
+
+        <div class="form-group">
+          <label for="emissorPassaporte">Emissor Passaporte</label>
+          <input type="text" id="emissorPassaporte" name="emissorPassaporte" placeholder="Órgão emissor" maxlength="10">
+        </div>
+
+        <div class="form-group">
+          <label for="logradouro">Logradouro</label>
+          <select type="text" id="logradouro" name="logradouro" required>
+            <option value="" disabled selected>Selecione...</option>
+            <option value="Rua">Rua</option>
+            <option value="Avenida">Avenida</option>
+            <option value="Travessa">Travessa</option>
+            <option value="Alameda">Alameda</option>
+            <option value="Praça">Praça</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="endereco">Endereço</label>
+          <input type="text" id="endereco" name="endereco" placeholder="Nome da via" maxlength="20" required>
+        </div>
+
+        <div class="form-group">
+          <label for="enderecoNumero">Número</label>
+          <input type="text" id="enderecoNumero" name="enderecoNumero" placeholder="Número do imóvel" maxlength="6"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="enderecoComplemento">Complemento</label>
+          <input type="text" id="enderecoComplemento" name="enderecoComplemento" placeholder="Apartamento, bloco, etc"
+            maxlength="20">
+        </div>
+
+        <div class="form-group">
+          <label for="enderecoBairro">Bairro</label>
+          <input type="text" id="enderecoBairro" name="enderecoBairro" placeholder="Bairro" maxlength="20" required>
+        </div>
+
+        <div class="form-group">
+          <label for="enderecoCidade">Cidade</label>
+          <input type="text" id="enderecoCidade" name="enderecoCidade" placeholder="Cidade" maxlength="20" required>
+        </div>
+
+        <div class="form-group">
+          <label for="enderecoEstado">Estado</label>
+          <select type="text" id="enderecoEstado" name="enderecoEstado" placeholder="UF" required>
+            <option value="" disabled selected>Selecione...</option>
+            <option value="AC">AC</option>
+            <option value="AL">AL</option>
+            <option value="AP">AP</option>
+            <option value="AM">AM</option>
+            <option value="BA">BA</option>
+            <option value="CE">CE</option>
+            <option value="DF">DF</option>
+            <option value="ES">ES</option>
+            <option value="GO">GO</option>
+            <option value="MA">MA</option>
+            <option value="MT">MT</option>
+            <option value="MS">MS</option>
+            <option value="MG">MG</option>
+            <option value="PA">PA</option>
+            <option value="PB">PB</option>
+            <option value="PR">PR</option>
+            <option value="PE">PE</option>
+            <option value="PI">PI</option>
+            <option value="RJ">RJ</option>
+            <option value="RN">RN</option>
+            <option value="RS">RS</option>
+            <option value="RO">RO</option>
+            <option value="RR">RR</option>
+            <option value="SC">SC</option>
+            <option value="SP">SP</option>
+            <option value="SE">SE</option>
+            <option value="TO">TO</option>
+          </select>
+        </div>
+
+        <!-- ================= DADOS FUNCIONAIS ================= -->
+        <div class="section-title">Dados Funcionais</div>
+
+        <div class="form-group">
+          <label for="cargo">Cargo</label>
+          <select id="cargo" name="cargo" placeholder="Professor Substituto" required
+            onchange="mudarClasse(); mudarSalario()">
+            <option value="" disabled selected>Selecione...</option>
+            <option value="Professor do Magistério Superior - Substituto">Professor Substituto</option>
+            <option value="Professor do Ensino Básico, Técnico e Tecnológico - Substituto">Professor EBTT Substituto
+            </option>
+            <option value="Professor Temporário">Professor Temporário</option>
+            <option value="Professor Visitante Adjunto">Professor Visitante Adjunto (Júnior)</option>
+            <option value="Professor Visitante Associado">Professor Visitante Associado (Júnior)</option>
+            <option value="Professor Visitante Titular">Professor Visitante Titular (Sênior)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="unidade">Unidade</label>
+          <select class="depto" id="unidade" th:field="*{unidade}" name="unidade" maxlength="30" required>
+            <option value="" disabled>Selecione...</option>
+            <option th:each="u : ${unidades}" th:value="${u.getDescricao()}" th:text="${u.descricao}"></option>
+          </select>
+        </div>
+
+        <div th:replace="~{fragments/area}"></div>
+
+        <div class="form-group">
+          <label for="cargaHoraria">Carga horária</label>
+          <select id="cargaHoraria" name="cargaHoraria" placeholder="Horas semanais" required onchange="mudarSalario()">
+            <option value="" disabled selected>Selecione...</option>
+            <option value="20">20 horas</option>
+            <option value="40">40 horas</option>
+            <option value="99">Dedicação Exclusiva</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="titulacao">Titulação</label>
+          <select id="titulacao" name="titulacao" required onchange="mudarSalario()">
+            <option value="0" selected>Graduação</option>
+            <option value="1">Aperfeiçoamento</option>
+            <option value="2">Especialização</option>
+            <option value="3">Mestrado</option>
+            <option value="4">Doutorado</option>
+          </select>
+        </div>
+
+        <div id="repoRemun" style="display: none;">
+          <span th:each="s,i: ${salarios}" th:id="'rem' + ${i.index}" th:data-value="${s.value}">
+          </span>
+        </div>
+
+        <div class="form-group">
+          <span for="remuneracao">Remuneração:</span>
+          <input type="hidden" id="remInput" name="remuneracao"></input>
+          <strong for="renum" id="remun"
+            th:text="${#numbers.formatDecimal(salarios[0].value, 1, 'POINT', 2, 'COMMA')}">0,00</strong>
+          <input type="hidden" id="renum"></input>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label for="classe">Classe:</label>
+          <input type="text" id="classe" name="classe" placeholder="Classe funcional" maxlength="10" required
+            style="color: midnightblue; border-style: hidden;" readonly>
+        </div>
+
+        <div class="form-group">
+          <label for="dataAssinatura">Data assinatura</label>
+          <input type="date" id="dataAssinatura" name="dataAssinatura" required>
+        </div>
+
+        <div class="form-group">
+          <label for="dataVigencia">Data vigência</label>
+          <input type="date" id="dataVigencia" name="dataVigencia" required>
+        </div>
+
+        <button type="submit" class="btn-submit">Cadastrar</button>
+
+      </form>
     </div>
-    <form th:action="@{/cadastrar}" th:object="${contrato}" method="post" class="form-grid">
 
-      <!-- ================= DADOS DO CONTRATO ================= -->
-      <div class="section-title">Dados do Contrato</div>
-
-      <div class="form-group">
-        <label for="anoContrato">Ano do contrato</label>
-        <input type="number" id="anoContrato" name="anoContrato" th:value="${#dates.year(#dates.createNow())}"
-          placeholder="Ano atual" readonly>
-      </div>
-
-      <div class="form-group">
-        <label for="numProc">Nº Processo</label>
-        <input type="text" id="numProc" name="numProc" placeholder="Ex: 23077/2026" maxlength="12" required>
-      </div>
-
-      <div class="form-group">
-        <label for="edital">Edital</label>
-        <input type="text" id="edital" name="edital" placeholder="Número do edital" maxlength="3" required>
-      </div>
-
-      <div class="form-group">
-        <label for="douEdital">DOU Edital</label>
-        <input type="text" id="douEdital" name="douEdital" placeholder="DOU do edital" maxlength="3" required>
-      </div>
-
-      <div class="form-group">
-        <label for="dataDouEdital">Data DOU Edital</label>
-        <input type="date" id="dataDouEdital" name="dataDouEdital" required>
-      </div>
-
-      <div class="form-group">
-        <label for="assinante">Assinante</label>
-        <select type="text" id="assinante" name="assinante" required>
-          <option>Selecione...</option>
-        </select>
-      </div>
-
-      <!-- ================= DADOS PESSOAIS ================= -->
-      <div class="section-title">Dados Pessoais</div>
-
-      <div class="form-group">
-        <label for="nome">Nome do professor</label>
-        <input type="text" id="nome" name="nome" placeholder="Nome completo" maxlength="70"
-          oninput="this.value = this.value.toUpperCase();" required>
-      </div>
-
-      <div class="form-group">
-        <label for="cpf">CPF</label>
-        <input type="text" id="cpf" name="cpf" placeholder="somente numeros" maxlength="11" required>
-      </div>
-
-      <div class="form-group">
-        <label for="estCivil">Estado civil</label>
-        <select id="estCivil" name="estCivil" required>
-          <option value="" disabled selected>Selecione...</option>
-          <option value="Solteiro(a)">Solteiro(a)</option>
-          <option value="União Estável">União Estável</option>
-          <option value="Casado(a)">Casado(a)</option>
-          <option value="Divorciado(a)">Divorciado(a)</option>
-          <option value="Viúvo(a)">Viúvo(a)</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="nacionalidade">Nacionalidade</label>
-        <input type="text" id="nacionalidade" name="nacionalidade" placeholder="Brasileira" maxlength="20" required>
-      </div>
-
-      <div class="form-group">
-        <label for="rg">RG</label>
-        <input type="text" id="rg" name="rg" placeholder="Ex: 123456789-0" maxlength="20" required>
-      </div>
-
-      <div class="form-group">
-        <label for="emissorRg">Emissor RG</label>
-        <input type="text" id="emissorRg" name="emissorRg" placeholder="SSP/UF, ITEP/UF..."
-          oninput="this.value = this.value.toUpperCase();" maxlength="10" required>
-      </div>
-
-      <div class="form-group">
-        <label for="passaporte">Passaporte</label>
-        <input type="text" id="passaporte" name="passaporte" placeholder="Número do passaporte" maxlength="20">
-      </div>
-
-      <div class="form-group">
-        <label for="emissorPassaporte">Emissor Passaporte</label>
-        <input type="text" id="emissorPassaporte" name="emissorPassaporte" placeholder="Órgão emissor" maxlength="10">
-      </div>
-
-      <div class="form-group">
-        <label for="logradouro">Logradouro</label>
-        <select type="text" id="logradouro" name="logradouro" required>
-          <option value="" disabled selected>Selecione...</option>
-          <option value="Rua">Rua</option>
-          <option value="Avenida">Avenida</option>
-          <option value="Travessa">Travessa</option>
-          <option value="Alameda">Alameda</option>
-          <option value="Praça">Praça</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="endereco">Endereço</label>
-        <input type="text" id="endereco" name="endereco" placeholder="Nome da via" maxlength="20" required>
-      </div>
-
-      <div class="form-group">
-        <label for="enderecoNumero">Número</label>
-        <input type="text" id="enderecoNumero" name="enderecoNumero" placeholder="Número do imóvel" maxlength="6"
-          required>
-      </div>
-
-      <div class="form-group">
-        <label for="enderecoComplemento">Complemento</label>
-        <input type="text" id="enderecoComplemento" name="enderecoComplemento" placeholder="Apartamento, bloco, etc"
-          maxlength="20">
-      </div>
-
-      <div class="form-group">
-        <label for="enderecoBairro">Bairro</label>
-        <input type="text" id="enderecoBairro" name="enderecoBairro" placeholder="Bairro" maxlength="20" required>
-      </div>
-
-      <div class="form-group">
-        <label for="enderecoCidade">Cidade</label>
-        <input type="text" id="enderecoCidade" name="enderecoCidade" placeholder="Cidade" maxlength="20" required>
-      </div>
-
-      <div class="form-group">
-        <label for="enderecoEstado">Estado</label>
-        <select type="text" id="enderecoEstado" name="enderecoEstado" placeholder="UF" required>
-          <option value="" disabled selected>Selecione...</option>
-          <option value="AC">AC</option>
-          <option value="AL">AL</option>
-          <option value="AP">AP</option>
-          <option value="AM">AM</option>
-          <option value="BA">BA</option>
-          <option value="CE">CE</option>
-          <option value="DF">DF</option>
-          <option value="ES">ES</option>
-          <option value="GO">GO</option>
-          <option value="MA">MA</option>
-          <option value="MT">MT</option>
-          <option value="MS">MS</option>
-          <option value="MG">MG</option>
-          <option value="PA">PA</option>
-          <option value="PB">PB</option>
-          <option value="PR">PR</option>
-          <option value="PE">PE</option>
-          <option value="PI">PI</option>
-          <option value="RJ">RJ</option>
-          <option value="RN">RN</option>
-          <option value="RS">RS</option>
-          <option value="RO">RO</option>
-          <option value="RR">RR</option>
-          <option value="SC">SC</option>
-          <option value="SP">SP</option>
-          <option value="SE">SE</option>
-          <option value="TO">TO</option>
-        </select>
-      </div>
-
-      <!-- ================= DADOS FUNCIONAIS ================= -->
-      <div class="section-title">Dados Funcionais</div>
-
-      <div class="form-group">
-        <label for="cargo">Cargo</label>
-        <select id="cargo" name="cargo" placeholder="Professor Substituto" required
-          onchange="mudarClasse(); mudarSalario()">
-          <option value="" disabled selected>Selecione...</option>
-          <option value="Professor do Magistério Superior - Substituto">Professor Substituto</option>
-          <option value="Professor do Ensino Básico, Técnico e Tecnológico - Substituto">Professor EBTT Substituto
-          </option>
-          <option value="Professor Temporário">Professor Temporário</option>
-          <option value="Professor Visitante Adjunto">Professor Visitante Adjunto (Júnior)</option>
-          <option value="Professor Visitante Associado">Professor Visitante Associado (Júnior)</option>
-          <option value="Professor Visitante Titular">Professor Visitante Titular (Sênior)</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="unidade">Unidade</label>
-        <select class="depto" id="unidade" th:field="*{unidade}" name="unidade" maxlength="30" required>
-          <option value="" disabled>Selecione...</option>
-          <option th:each="u : ${unidades}" th:value="${u.getDescricao()}" th:text="${u.descricao}"></option>
-        </select>
-      </div>
-
-      <div th:replace="~{fragments/area}"></div>
-
-      <div class="form-group">
-        <label for="cargaHoraria">Carga horária</label>
-        <select id="cargaHoraria" name="cargaHoraria" placeholder="Horas semanais" required onchange="mudarSalario()">
-          <option value="" disabled selected>Selecione...</option>
-          <option value="20">20 horas</option>
-          <option value="40">40 horas</option>
-          <option value="99">Dedicação Exclusiva</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="titulacao">Titulação</label>
-        <select id="titulacao" name="titulacao" required onchange="mudarSalario()">
-          <option value="0" selected>Graduação</option>
-          <option value="1">Aperfeiçoamento</option>
-          <option value="2">Especialização</option>
-          <option value="3">Mestrado</option>
-          <option value="4">Doutorado</option>
-        </select>
-      </div>
-
-      <div id="repoRemun" style="display: none;">
-        <span th:each="s,i: ${salarios}" th:id="'rem' + ${i.index}" th:data-value="${s.value}">
-        </span>
-      </div>
-
-      <div class="form-group">
-        <label for="remuneracao">Remuneração:</label>
-        <label id="remun" th:text="${#numbers.formatDecimal(salarios[0].value, 1, 'POINT', 2, 'COMMA')}">
-        </label>
-        <input type="hidden" id="remInput" name="remuneracao"></input>
-      </div>
-
-      <div class="form-group">
-        <label for="classe">Classe:</label>
-        <input type="text" id="classe" name="classe" placeholder="Classe funcional" maxlength="10" required
-          style="color: midnightblue; border-style: hidden;" readonly>
-      </div>
-
-      <div class="form-group">
-        <label for="dataAssinatura">Data assinatura</label>
-        <input type="date" id="dataAssinatura" name="dataAssinatura" required>
-      </div>
-
-      <div class="form-group">
-        <label for="dataVigencia">Data vigência</label>
-        <input type="date" id="dataVigencia" name="dataVigencia" required>
-      </div>
-
-      <button type="submit" class="btn-submit">Cadastrar</button>
-
-    </form>
-  </div>
-
-  <br />
-
+    <br />
+  </main>
   <script th:src="@{/js/calc-vigencia.js}"></script>
   <script th:src="@{/js/remuneracao.js}"></script>
 </body>

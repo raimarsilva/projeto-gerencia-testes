@@ -1,34 +1,41 @@
-package com.projeto.teste.ProjetoTestes.service;
+package com.projeto.teste.projetotestes.service;
 
-import static com.projeto.teste.ProjetoTestes.utils.DinheiroPorExtenso.paraRealHumano;
+import static com.projeto.teste.projetotestes.utils.DinheiroPorExtenso.paraRealHumano;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.projeto.teste.ProjetoTestes.model.Contrato;
-import com.projeto.teste.ProjetoTestes.repository.ContratoRepository;
+import com.projeto.teste.projetotestes.model.Contrato;
+import com.projeto.teste.projetotestes.repository.ContratoRepository;
 
 @Service
 public class ContratoService {
+  private static final Logger logger = LoggerFactory.getLogger(ContratoService.class);
   private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd 'de' MMMM 'de' yyyy",
       new Locale("pt", "BR"));
 
-  @Autowired
-  ContratoRepository contratoRepository;
+  private final ContratoRepository contratoRepository;
+
+  public ContratoService(ContratoRepository contratoRepository) {
+    this.contratoRepository = contratoRepository;
+  }
 
   public Contrato salvar(Contrato contrato) {
-    System.out.printf("CONTRATO VINDO DO HTML:\n\s", contrato.toString());
-    Contrato contratoProcessado = calculaDerivados(contrato);
-    if (contratoProcessado != null) {
-      return contratoRepository.save(contratoProcessado);
+    if (contrato == null) {
+      throw new IllegalArgumentException("Contrato não pode ser nulo");
     }
-    return null;
+    logger.debug("CONTRATO VINDO DO HTML: {}", contrato);
+    Contrato contratoProcessado = calculaDerivados(contrato);
+    return contratoRepository.save(contratoProcessado);
+
   }
 
   public List<Contrato> listarTodos() {

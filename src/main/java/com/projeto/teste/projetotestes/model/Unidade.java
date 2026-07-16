@@ -1,4 +1,4 @@
-package com.projeto.teste.ProjetoTestes.model;
+package com.projeto.teste.projetotestes.model;
 
 public enum Unidade {
   DAPGS("DEPARTAMENTO DE ADMINISTRAÇÃO PÚBLICA E GESTÃO SOCIAL"),

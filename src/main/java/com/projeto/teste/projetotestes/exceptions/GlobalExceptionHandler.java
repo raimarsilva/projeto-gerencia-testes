@@ -1,4 +1,4 @@
-package com.projeto.teste.ProjetoTestes.exceptions;
+package com.projeto.teste.projetotestes.exceptions;
 
 import java.util.ArrayList;
 import java.util.List;

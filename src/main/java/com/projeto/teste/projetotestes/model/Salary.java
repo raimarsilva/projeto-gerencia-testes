@@ -1,4 +1,4 @@
-package com.projeto.teste.ProjetoTestes.model;
+package com.projeto.teste.projetotestes.model;
 
 import java.time.LocalDate;
 
@@ -36,15 +36,16 @@ public class Salary {
   @Builder.Default
   private boolean active = true;
 
-  @Column(name="created_date", nullable = false, updatable = false)
+  @Column(name = "created_date", nullable = false, updatable = false)
   @DateTimeFormat(iso = ISO.DATE)
   private LocalDate createdDate;
 
-  @Column(nullable=false, precision = 10, scale = 2)
+  @Column(nullable = false, precision = 10, scale = 2)
   private double value;
 
   @PrePersist
-  protected void onCreate(){
-    if(this.createdDate == null) createdDate = LocalDate.now();
+  protected void onCreate() {
+    if (this.createdDate == null)
+      createdDate = LocalDate.now();
   }
 }

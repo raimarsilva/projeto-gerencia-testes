@@ -1,4 +1,4 @@
-package com.projeto.teste.ProjetoTestes.model;
+package com.projeto.teste.projetotestes.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.projeto.teste.ProjetoTestes.security.CriptoConverter;
+import com.projeto.teste.projetotestes.security.CriptoConverter;
 
 import lombok.Getter;
 import lombok.Setter;
