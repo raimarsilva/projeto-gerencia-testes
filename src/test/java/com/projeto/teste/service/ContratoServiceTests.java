@@ -12,25 +12,26 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.projeto.teste.ProjetoTestes.model.Contrato;
-import com.projeto.teste.ProjetoTestes.repository.ContratoRepository;
-import com.projeto.teste.ProjetoTestes.service.ContratoService;
+import com.projeto.teste.projetotestes.model.Contrato;
+import com.projeto.teste.projetotestes.repository.ContratoRepository;
+import com.projeto.teste.projetotestes.service.ContratoService;
 
-@ExtendWith(SpringExtension.class)
+@ExtendWith(MockitoExtension.class)
 public class ContratoServiceTests {
 
   @InjectMocks
-  ContratoService contratoService;
+  private ContratoService contratoService;
 
   @Mock
-  ContratoRepository contratoRepository;
+  private ContratoRepository contratoRepository;
 
-  Contrato ct;
+  private Contrato ct;
 
+  @SuppressWarnings("null")
   @BeforeEach
-  public void setUp() {
+  void setUp() {
     ct = new Contrato();
     ct.setNumProc("12345");
     ct.setAnoContrato(2023);
@@ -42,7 +43,7 @@ public class ContratoServiceTests {
     ct.setRemuneracao(BigDecimal.valueOf(5432.19));
 
     when(contratoRepository.save(org.mockito.ArgumentMatchers.any(Contrato.class)))
-      .thenAnswer(invoc -> invoc.getArgument(0));
+        .thenAnswer(inv -> inv.getArgument(0));
   }
 
   @Test
@@ -57,5 +58,5 @@ public class ContratoServiceTests {
     assertEquals("01 de outubro de 2023", cts.getDataAssExtenso());
     assertEquals("cinco mil quatrocentos e trinta e dois reais e dezenove centavos", cts.getRemuneracaoExtenso());
   }
-    
+
 }

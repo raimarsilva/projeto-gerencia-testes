@@ -1,12 +1,12 @@
-package com.projeto.teste.ProjetoTestes.controller;
+package com.projeto.teste.projetotestes.controller;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.projeto.teste.ProjetoTestes.model.Salary;
-import com.projeto.teste.ProjetoTestes.service.SalaryService;
+import com.projeto.teste.projetotestes.model.Salary;
+import com.projeto.teste.projetotestes.service.SalaryService;
 
 @Controller
 public class SalaryController {

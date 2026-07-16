@@ -1,4 +1,4 @@
-package com.projeto.teste.ProjetoTestes.security;
+package com.projeto.teste.projetotestes.security;
 
 import java.nio.ByteBuffer;
 import java.security.SecureRandom;
@@ -26,7 +26,7 @@ public class CriptoConverter implements AttributeConverter<String, String> {
   private final SecureRandom secureRandom = new SecureRandom();
 
   @Value("${DB_CRIPTO_KEY:}")
-  public void setSecretKey(String key){
+  public void setSecretKey(String key) {
     CriptoConverter.secretKey = key;
   }
 
