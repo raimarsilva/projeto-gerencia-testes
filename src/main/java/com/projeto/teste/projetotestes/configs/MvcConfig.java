@@ -1,4 +1,4 @@
-package com.projeto.teste.ProjetoTestes.configs;
+package com.projeto.teste.projetotestes.configs;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.NonNull;

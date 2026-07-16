@@ -1,4 +1,4 @@
-package com.projeto.teste.ProjetoTestes.service;
+package com.projeto.teste.projetotestes.service;
 
 import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
-import com.projeto.teste.ProjetoTestes.model.Contrato;
+import com.projeto.teste.projetotestes.model.Contrato;
 
 @Service
 public class DocumentService {
@@ -27,11 +27,14 @@ public class DocumentService {
   private String fileurl;
 
   public byte[] generateFromDB(Optional<Contrato> contrato) throws Exception {
-    if (fileurl == null || contrato.isEmpty()) {
+    if (contrato.isEmpty())
       return new byte[0];
-    }
+
+    if (fileurl == null)
+      throw new Exception("Endereço do arquivo inválido.");
 
     byte[] responseBytes = rest.getForObject(fileurl, byte[].class);
+
     String htmlpuro = new String(responseBytes, StandardCharsets.UTF_8);
 
     Context context = new Context();

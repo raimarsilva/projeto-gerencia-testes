@@ -1,9 +1,9 @@
-package com.projeto.teste.ProjetoTestes.repository;
+package com.projeto.teste.projetotestes.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.projeto.teste.ProjetoTestes.model.Salary;
+import com.projeto.teste.projetotestes.model.Salary;
 
 @Repository
 public interface SalaryRepository extends JpaRepository<Salary, Integer> {
