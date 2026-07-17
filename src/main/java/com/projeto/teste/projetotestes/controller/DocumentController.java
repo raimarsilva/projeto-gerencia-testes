@@ -1,7 +1,6 @@
 package com.projeto.teste.projetotestes.controller;
 
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,11 +18,14 @@ import com.projeto.teste.projetotestes.service.DocumentService;
 @Controller
 public class DocumentController {
 
-  @Autowired
-  DocumentService documentService;
+  final DocumentService documentService;
 
-  @Autowired
-  ContratoRepository contratoRepository;
+  final ContratoRepository contratoRepository;
+
+  DocumentController(DocumentService documentService, ContratoRepository contratoRepository) {
+    this.documentService = documentService;
+    this.contratoRepository = contratoRepository;
+  }
 
   @GetMapping("/gerar")
   public ResponseEntity<byte[]> gerarContrato(@RequestParam @NonNull String id) {
@@ -33,7 +35,7 @@ public class DocumentController {
       Optional<Contrato> contrato = contratoRepository.findById(lid);
 
       if (contrato.isEmpty()) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        return ResponseEntity.notFound().build();
       }
 
       byte[] pdfBytes = documentService.generateFromDB(contrato);

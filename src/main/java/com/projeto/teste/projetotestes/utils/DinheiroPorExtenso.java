@@ -1,15 +1,22 @@
 package com.projeto.teste.projetotestes.utils;
 
-import pl.allegro.finance.tradukisto.MoneyConverters;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+import lombok.extern.slf4j.Slf4j;
+import pl.allegro.finance.tradukisto.MoneyConverters;
+
+@Slf4j
 public class DinheiroPorExtenso {
+  private DinheiroPorExtenso() {
+    /* This utility class should not be instantiated */
+  }
+
   public static String paraReal(BigDecimal valor) {
 
     var converter = MoneyConverters.BRAZILIAN_PORTUGUESE_BANKING_MONEY_VALUE;
     String extenso = converter.asWords(valor);
-    System.out.println("valor por extenso: " + extenso);
+    log.info("valor por extenso: " + extenso);
     return extenso;
   }
 

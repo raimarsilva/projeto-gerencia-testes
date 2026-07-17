@@ -1,6 +1,6 @@
 package com.projeto.teste.projetotestes.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +14,13 @@ import com.projeto.teste.projetotestes.service.SalaryService;
 @RequestMapping(path = "/")
 public class ContratoController {
 
-  @Autowired
-  ContratoService contratoService;
-  @Autowired
-  SalaryService salaryService;
+  final ContratoService contratoService;
+  final SalaryService salaryService;
+
+  ContratoController(ContratoService contratoService, SalaryService salaryService) {
+    this.contratoService = contratoService;
+    this.salaryService = salaryService;
+  }
 
   @GetMapping({ "", "/", "/index" })
   public String index(Model model) {
@@ -34,8 +37,9 @@ public class ContratoController {
   }
 
   @PostMapping(path = "/cadastrar")
-  public String salvar(@ModelAttribute Contrato contrato) {
+  public String salvar(@ModelAttribute @NonNull Contrato contrato) {
     contratoService.salvar(contrato);
     return "redirect:/";
   }
+
 }
