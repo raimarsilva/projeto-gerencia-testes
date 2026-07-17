@@ -1,6 +1,7 @@
 package com.projeto.teste.projetotestes.model;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -46,6 +48,6 @@ public class Salary {
   @PrePersist
   protected void onCreate() {
     if (this.createdDate == null)
-      createdDate = LocalDate.now();
+      createdDate = LocalDate.now(ZoneId.of("America/Recife"));
   }
 }

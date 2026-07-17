@@ -3,15 +3,14 @@ package com.projeto.teste.projetotestes.exceptions;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@RestControllerAdvice
-public class GlobalExceptionHandler {
+import lombok.extern.slf4j.Slf4j;
 
-  private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+@RestControllerAdvice
+@Slf4j
+public class GlobalExceptionHandler {
 
   @ExceptionHandler(Exception.class)
   public String handle(Exception e) {

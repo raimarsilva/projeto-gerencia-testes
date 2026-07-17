@@ -19,7 +19,7 @@ import com.projeto.teste.projetotestes.repository.ContratoRepository;
 import com.projeto.teste.projetotestes.service.ContratoService;
 
 @ExtendWith(MockitoExtension.class)
-public class ContratoServiceTests {
+class ContratoServiceTests {
 
   @InjectMocks
   private ContratoService contratoService;
