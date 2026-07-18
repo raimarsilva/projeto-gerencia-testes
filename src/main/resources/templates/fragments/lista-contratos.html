@@ -11,6 +11,8 @@
                 <th>Carga Horária</th>
                 <th>Data Assinatura</th>
                 <th>Data Vigência</th>
+                <th>Nacionalidade</th>
+                <th>Opções</th>
             </tr>
         </thead>
         <tbody>
@@ -24,7 +26,12 @@
                 <td th:text="${c.dataAssinatura}"></td>
                 <td th:text="${c.dataVigencia}"></td>
                 <td th:text="${c.nacionalidade}"></td>
+                <td>
+                    <th:block th:replace="~{fragments/btn-frag :: gen-doc(id=${c.id})}"></th:block>
+                </td>
             </tr>
         </tbody>
     </table>
 </div>
+
+</html>
