@@ -13,22 +13,22 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-  @Autowired
-  private SupabaseAuthenticationProvider authProvider;
+  private final SupabaseAuthenticationProvider authProvider;
+
+  private static final String LOGINURL = "/login";
+
+  public SecurityConfig(SupabaseAuthenticationProvider authProvider) {
+    this.authProvider = authProvider;
+  }
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.csrf(Customizer.withDefaults())
+    http.csrf(Customizer.withDefaults()).authenticationProvider(authProvider)
         .authorizeHttpRequests(
-            auth -> auth.antMatchers("/login", "/error", "/css/**", "/gerar").permitAll().anyRequest().authenticated())
-        .formLogin(form -> form.loginPage("/login").defaultSuccessUrl("/home", true).permitAll())
-        .logout(logout -> logout.logoutSuccessUrl("/login").deleteCookies("JSESSIONID"));
+            auth -> auth.antMatchers(LOGINURL, "/error", "/css/**").permitAll().anyRequest().authenticated())
+        .formLogin(form -> form.loginPage(LOGINURL).defaultSuccessUrl("/home", true).permitAll())
+        .logout(logout -> logout.logoutSuccessUrl(LOGINURL).deleteCookies("JSESSIONID").invalidateHttpSession(true));
 
     return http.build();
-  }
-
-  @Autowired
-  public void configure(AuthenticationManagerBuilder auth) {
-    auth.authenticationProvider(authProvider);
   }
 }

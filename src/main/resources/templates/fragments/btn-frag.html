@@ -1,0 +1,5 @@
+<th:block th:fragment="gen-doc(id)">
+    <input type="button" title="Gerar contrato" value="📄"
+        th:onclick="|window.open('@{/gerar(id=${id})}', '_blank', 'noopener,noreferrer');|"
+        style="border: 0; background: none; cursor: pointer;">
+</th:block>
