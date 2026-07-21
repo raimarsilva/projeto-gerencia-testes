@@ -1,9 +1,9 @@
 package com.projeto.teste.projetotestes.service;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -16,40 +16,59 @@ import com.projeto.teste.projetotestes.model.Contrato;
 @Service
 public class DocumentService {
 
-  @Autowired
-  private RestTemplate rest;
+  private final RestTemplate rest;
+  private final TemplateEngine te;
+  private final String fileUrl;
 
-  @Autowired
-  @Qualifier("stringTemplateEngine")
-  private TemplateEngine te;
+  public DocumentService(RestTemplate rest, @Qualifier("stringTemplateEngine") TemplateEngine te,
+      @Value("${GDRIVE_FILE_URL}") String fileUrl) {
+    this.rest = rest;
+    this.te = te;
+    this.fileUrl = fileUrl;
+  }
 
-  @Value("${GDRIVE_FILE_URL}")
-  private String fileurl;
-
-  public byte[] generateFromDB(Optional<Contrato> contrato) throws Exception {
+  public byte[] generateFromDB(Optional<Contrato> contrato) throws IllegalArgumentException, IOException {
     if (contrato.isEmpty())
       return new byte[0];
 
-    if (fileurl == null)
-      throw new Exception("Endereço do arquivo inválido.");
+    validateHtmlTemplateSource();
 
-    byte[] responseBytes = rest.getForObject(fileurl, byte[].class);
+    String rawHtml = htmlTemplateDownload();
+    String processedHtml = processTemplate(rawHtml, contrato.get());
 
-    String htmlpuro = new String(responseBytes, StandardCharsets.UTF_8);
+    return renderPdfFromHtml(processedHtml);
+  }
 
+  private void validateHtmlTemplateSource() {
+    if (fileUrl == null || fileUrl.isBlank()) {
+      throw new IllegalStateException("Não encontrou endereço do template.");
+    }
+  }
+
+  private String htmlTemplateDownload() {
+    byte[] responseBytes = rest.getForObject(fileUrl, byte[].class);
+    if (responseBytes == null || responseBytes.length == 0) {
+      throw new IllegalStateException("Falha ao baixar o modelo do documento");
+    }
+
+    return new String(responseBytes, StandardCharsets.UTF_8);
+  }
+
+  private String processTemplate(String rawHtml, Contrato c) {
     Context context = new Context();
 
-    context.setVariable("contrato", contrato.get());
+    context.setVariable("contrato", c);
 
-    String htmlProcessed = te.process(htmlpuro, context);
+    return te.process(rawHtml, context);
+  }
 
-    ByteArrayOutputStream out = new ByteArrayOutputStream();
-    PdfRendererBuilder builder = new PdfRendererBuilder();
-
-    builder.withHtmlContent(htmlProcessed, null);
-    builder.toStream(out);
-    builder.run();
-
-    return out.toByteArray();
+  private byte[] renderPdfFromHtml(String htmlContent) throws IOException {
+    try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+      PdfRendererBuilder builder = new PdfRendererBuilder();
+      builder.withHtmlContent(htmlContent, null);
+      builder.toStream(out);
+      builder.run();
+      return out.toByteArray();
+    }
   }
 }

@@ -2,12 +2,9 @@ package com.projeto.teste.projetotestes.service;
 
 import static com.projeto.teste.projetotestes.utils.DinheiroPorExtenso.paraRealHumano;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +25,7 @@ public class ContratoService {
     this.contratoRepository = contratoRepository;
   }
 
+  @SuppressWarnings("null")
   public Contrato salvar(Contrato contrato) {
     if (contrato == null) {
       throw new IllegalArgumentException("Contrato não pode ser nulo");
@@ -47,22 +45,24 @@ public class ContratoService {
    * banco.
    */
   private Contrato calculaDerivados(Contrato contrato) {
-    LocalDate dataAssinatura = contrato.getDataAssinatura();
-    BigDecimal remuneracao = contrato.getRemuneracao();
-    if (contrato.getDataAssinatura() != null) {
-      DateTimeFormatter formatter = FORMATTER;
-      String dataFormatada = dataAssinatura.format(formatter);
-      contrato.setDataAssExtenso(dataFormatada);
-
-      contrato.setDataLimite(dataAssinatura.plusYears(2));
+    if (contrato == null) {
+      return null;
     }
 
-    if (contrato.getRemuneracao() != null) {
-      String valorExtenso = paraRealHumano(remuneracao);
-      contrato.setRemuneracaoExtenso(valorExtenso);
-    }
+    dataPorExtenso(contrato);
+    remuneracaoPorExtenso(contrato);
+
+    contrato.setDataLimite(contrato.getDataAssinatura().plusYears(2));
 
     return contrato;
+  }
+
+  private void dataPorExtenso(Contrato c) {
+    c.setDataAssExtenso(c.getDataAssinatura().format(FORMATTER));
+  }
+
+  private void remuneracaoPorExtenso(Contrato c) {
+    c.setRemuneracaoExtenso(paraRealHumano(c.getRemuneracao()));
   }
 
 }
