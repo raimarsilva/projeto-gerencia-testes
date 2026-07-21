@@ -13,4 +13,4 @@ FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 COPY --from=build /app/build/libs/*.jar app.jar
 
-CMD ["sh", "-c", "java -jar app.jar --server.port=$PORT"]
+CMD ["java", "-jar", "app.jar"]
