@@ -3,6 +3,7 @@ package com.projeto.teste.projetotestes.service;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,12 +15,20 @@ import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import com.projeto.teste.projetotestes.model.Contrato;
 
 @Service
+/** Serviço responsável por gerar documentos PDF a partir de templates HTML. */
 public class DocumentService {
 
   private final RestTemplate rest;
   private final TemplateEngine te;
   private final String fileUrl;
 
+  /**
+   * Cria um serviço de documentos.
+   *
+   * @param rest cliente HTTP usado para baixar o template HTML
+   * @param te mecanismo usado para processar o template
+   * @param fileUrl endereço do template HTML
+   */
   public DocumentService(RestTemplate rest, @Qualifier("stringTemplateEngine") TemplateEngine te,
       @Value("${GDRIVE_FILE_URL}") String fileUrl) {
     this.rest = rest;
@@ -27,6 +36,14 @@ public class DocumentService {
     this.fileUrl = fileUrl;
   }
 
+  /**
+   * Gera um PDF preenchendo o template com os dados do contrato.
+   *
+   * @param contrato contrato utilizado no preenchimento do template
+   * @return conteúdo do PDF gerado, ou um array vazio quando o contrato não existe
+   * @throws IllegalArgumentException quando os dados fornecidos são inválidos
+   * @throws IOException quando ocorre erro durante a geração do PDF
+   */
   public byte[] generateFromDB(Optional<Contrato> contrato) throws IllegalArgumentException, IOException {
     if (contrato.isEmpty())
       return new byte[0];
@@ -39,21 +56,31 @@ public class DocumentService {
     return renderPdfFromHtml(processedHtml);
   }
 
+  /** Valida se o endereço do template HTML foi configurado. */
   private void validateHtmlTemplateSource() {
     if (fileUrl == null || fileUrl.isBlank()) {
       throw new IllegalStateException("Não encontrou endereço do template.");
     }
   }
 
+  /**
+   * Baixa o template HTML configurado.
+   *
+   * @return conteúdo do template em UTF-8
+   */
   private String htmlTemplateDownload() {
-    byte[] responseBytes = rest.getForObject(fileUrl, byte[].class);
-    if (responseBytes == null || responseBytes.length == 0) {
-      throw new IllegalStateException("Falha ao baixar o modelo do documento");
-    }
+    byte[] responseBytes = rest.getForObject(Objects.requireNonNull(fileUrl), byte[].class);
 
     return new String(responseBytes, StandardCharsets.UTF_8);
   }
 
+  /**
+   * Processa o template com os dados do contrato.
+   *
+   * @param rawHtml template HTML original
+   * @param c contrato usado como variável do template
+   * @return HTML processado
+   */
   private String processTemplate(String rawHtml, Contrato c) {
     Context context = new Context();
 
@@ -62,6 +89,13 @@ public class DocumentService {
     return te.process(rawHtml, context);
   }
 
+  /**
+   * Renderiza o conteúdo HTML como PDF.
+   *
+   * @param htmlContent conteúdo HTML processado
+   * @return bytes do PDF gerado
+   * @throws IOException quando ocorre erro durante a renderização
+   */
   private byte[] renderPdfFromHtml(String htmlContent) throws IOException {
     try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
       PdfRendererBuilder builder = new PdfRendererBuilder();
