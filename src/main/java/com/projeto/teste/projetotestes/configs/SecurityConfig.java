@@ -23,7 +23,7 @@ public class SecurityConfig {
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.csrf(Customizer.withDefaults()).authenticationProvider(authProvider)
         .authorizeHttpRequests(
-            auth -> auth.antMatchers(LOGINURL, "/error", "/css/**").permitAll().anyRequest().authenticated())
+            auth -> auth.antMatchers(LOGINURL, "/error", "/css/**", "/*.jsf").permitAll().anyRequest().authenticated())
         .formLogin(form -> form.loginPage(LOGINURL).defaultSuccessUrl("/home", true).permitAll())
         .logout(logout -> logout.logoutSuccessUrl(LOGINURL).deleteCookies("JSESSIONID").invalidateHttpSession(true));
 
