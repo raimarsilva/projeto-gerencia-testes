@@ -1,7 +1,7 @@
-<div class="listing" th:fragment="lista-contratos">
-    <h2>CONTRATOS CADASTRADOS</h2>
-    <table>
-        <thead>
+<div class="rounded-xl shadow-sm border border-slate-200 overflow-hidden" th:fragment="lista-contratos">
+    <table class="w-full text-left text-sm text-slate-600">
+        <thead
+            class="bg-slate-50 border-b border-slate-200 text-slate-700 font-semibold uppercase text-xs tracking-wider">
             <tr>
                 <th>Ano</th>
                 <th>Nº Processo</th>
@@ -15,7 +15,7 @@
                 <th>Opções</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="divide-y divide-slate-200">
             <tr th:each="c : ${contratos}">
                 <td th:text="${c.anoContrato}"></td>
                 <td th:text="${c.numProc}"></td>
