@@ -22,12 +22,12 @@ public class ContratoController {
     this.salaryService = salaryService;
   }
 
-  @GetMapping({ "", "/", "/index" })
-  public String index(Model model) {
+  @GetMapping({ "", "/", "/cadastro" })
+  public String cadastro(Model model) {
     model.addAttribute("contrato", new Contrato());
     model.addAttribute("unidades", Unidade.values());
     model.addAttribute("salarios", salaryService.listarTodos());
-    return "index";
+    return "cadastro";
   }
 
   @GetMapping({ "/home" })

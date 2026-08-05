@@ -36,5 +36,5 @@ document.addEventListener("DOMContentLoaded", function () {
     const mm = String(dataFinal.getMonth() + 1).padStart(2, '0');
     const dd = String(dataFinal.getDate()).padStart(2, '0');
 
-    input.value = `${yyyy}-${mm}-${dd}`;
+    input.value = `${dd}-${mm}-${yyyy}`;
 });

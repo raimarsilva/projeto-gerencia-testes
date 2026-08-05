@@ -50,7 +50,7 @@ div {
 
 /* FORMULÁRIOS EM GERAL */
 
-.registry-box form {
+#cadastro form {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 12px 20px;
