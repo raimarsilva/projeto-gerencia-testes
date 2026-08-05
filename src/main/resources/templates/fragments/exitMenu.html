@@ -1,0 +1,12 @@
+<div th:fragment="exitMenu" sec:authorize="isAuthenticated()" class="align-middle">
+    Logado como: <span th:text="${#strings.substringBefore(#authentication.name, '@')}">Nome do
+        usuário</span>
+    <form th:action="@{/logout}" method="post" class="inline-block">
+        <button type="submit" title="Sair do sistema" aria-label="Sair do sistema"
+            class="p-2 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition duration-150 ease-in-out cursor-pointer flex items-center justify-center">
+            <!-- Ícone SVG nativo de Logout (Sair) -->
+            <svg th:replace="~{fragments/icons :: exitIcon(class='w-6 h-6 stroke-2')}"></svg>
+            </svg>
+        </button>
+    </form>
+</div>
