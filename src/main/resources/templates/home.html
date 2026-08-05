@@ -1,34 +1,26 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    th:replace="~{layouts/base :: layout(~{::#home}, ~{::title})}">
 
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Gestor Contratos</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
-    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
-    <div class="max-w-7xl mx-auto space-y-6">
+    <div id="home" class="max-w-7xl mx-auto space-y-6">
         <div class="flex items-center justify-between" sec:authorize="isAuthenticated()">
-            <div>
-                Logado como: <span th:text="${#strings.substringBefore(#authentication.name, '@')}">Nome do
-                    usuário</span>
-            </div>
+            <h1>Contrato de professores</h1>
             <div th:replace="~{fragments/btn-cad-contr}"></div>
         </div>
-        <div
-            class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-xl shadow-sm border border-slate-200">
-            <h1>Contrato de professores</h1>
-            <p th:if="${contratos == null or contratos.isEmpty()}">Nenhum contrato cadastrado.</p>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-sm shadow-sm border border-slate-200"
+            th:if="${contratos == null or contratos.isEmpty()}">
+            <p>Nenhum contrato cadastrado.</p>
         </div>
 
-        <div th:replace="fragments/lista-contratos"></div>
+        <div th:replace="~{fragments/lista-contratos}"></div>
 
-
-        <div sec:authorize="!isAuthenticated()">
-            <a href="/login">Login</a>
-        </div>
     </div>
 </body>
 

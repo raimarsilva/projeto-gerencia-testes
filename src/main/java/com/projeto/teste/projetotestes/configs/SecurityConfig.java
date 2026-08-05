@@ -22,6 +22,7 @@ public class SecurityConfig {
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.csrf(Customizer.withDefaults()).authenticationProvider(authProvider)
+        .headers(headers -> headers.defaultsDisabled().cacheControl(Customizer.withDefaults()))
         .authorizeHttpRequests(
             auth -> auth.antMatchers(LOGINURL, "/error", "/css/**", "/*.jsf").permitAll().anyRequest().authenticated())
         .formLogin(form -> form.loginPage(LOGINURL).defaultSuccessUrl("/home", true).permitAll())

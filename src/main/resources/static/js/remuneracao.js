@@ -1,7 +1,6 @@
 let r = document.getElementById("remun").innerText
 console.log(r)
 
-
 function mudarSalario() {
     const ch = document.getElementById("cargaHoraria").value;
     console.log("carga horaria: " + ch);
