@@ -1,8 +1,11 @@
 package com.projeto.teste.projetotestes.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import com.projeto.teste.projetotestes.model.Contrato;
@@ -37,9 +40,12 @@ public class ContratoController {
   }
 
   @PostMapping(path = "/cadastrar")
-  public String salvar(@ModelAttribute @NonNull Contrato contrato) {
+  public String salvar(@Valid @ModelAttribute @NonNull Contrato contrato, BindingResult result) {
+    if (result.hasErrors()) {
+      return "cadastro";
+    }
     contratoService.salvar(contrato);
-    return "redirect:/";
+    return "redirect:/home";
   }
 
 }

@@ -35,7 +35,7 @@
       <div class="flex flex-col">
         <label for="anoContrato">Ano do contrato</label>
         <input type="number" id="anoContrato" name="anoContrato" th:value="${#dates.year(#dates.createNow())}"
-          placeholder="Ano atual" readonly class="border border-slate-500 rounded-sm">
+          placeholder="Ano atual" readonly>
       </div>
 
       <div class="flex flex-col">
@@ -46,8 +46,9 @@
 
       <div class="flex flex-col">
         <label for="edital">Edital</label>
-        <input type="text" id="edital" name="edital" placeholder="Número do edital" maxlength="3" required
-          class="border border-slate-500 rounded-sm">
+        <input type="text" id="edital" name="edital" th:field="*{edital}" placeholder="Ex: 012/2026" maxlength="8"
+          required class="border border-slate-500 rounded-sm">
+        <span th:if="${#fields.hasErrors('edital')}" th:errors="*{edital}" class="text-sm text-red-800"></span>
       </div>
 
       <div class="flex flex-col">
@@ -65,6 +66,8 @@
         <label for="assinante">Assinante</label>
         <select type="text" id="assinante" name="assinante" required class="border border-slate-500 rounded-sm">
           <option>Selecione...</option>
+          <option>Alberto Segundo Spínola da Hora</option>
+          <option>Solange Àlvares dos Santos</option>
         </select>
       </div>
 
@@ -291,6 +294,7 @@
 
     <script th:src="@{/js/calc-vigencia.js}"></script>
     <script th:src="@{/js/remuneracao.js}"></script>
+    <script th:src="@{/js/mascaras.js}"></script>
   </div>
 </body>
 

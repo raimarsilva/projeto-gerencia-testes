@@ -1,5 +1,6 @@
-<a th:fragment="btnBack" th:href="@{/home}"
-    class="text-sm font-medium text-slate-600 hover:text-indigo-600 transition flex items-center gap-1.5 py-1.5 rounded-md">
+<button th:fragment="btnBack" th:href="@{/home}"
+    onclick="document.referrer ? history.back() : window.location.href='/home'"
+    class="text-md font-medium px-2 text-indigo-600 hover:text-slate-200 hover:bg-indigo-600 transition inline-flex items-center gap-1 rounded-md">
     <svg th:replace="~{fragments/icons :: backIcon}"></svg>
     <span>Voltar</span>
-</a>
+</button>

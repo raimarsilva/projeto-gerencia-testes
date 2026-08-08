@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -36,6 +37,7 @@ public class Contrato {
   // ############### dados publicos ###############
   @NotBlank
   @Column(nullable = false)
+  @Size(min = 9)
   private String numProc;
 
   @NotNull
@@ -48,6 +50,7 @@ public class Contrato {
 
   @NotBlank
   @Column(nullable = false)
+  @Size(min = 6, message = "Mínimo de 5 dígitos.")
   private String edital;
 
   @NotBlank

@@ -9,19 +9,19 @@
     <title th:replace="${title}">Título padrão</title>
 </head>
 
-<body class="bg-slate-100 flex flex-col min-h-screen">
-    <header class="bg-slate-900 text-white p-3">
+<body class="bg-slate-100 flex flex-col h-screen overflow-hidden">
+    <header class="bg-slate-900 text-white p-3 shrink-0">
         <nav class="max-w-7xl mx-auto flex justify-between items-center">
             <span class="font-bold text-lg">Gestor de Contratos</span>
             <div th:replace="~{fragments/exitMenu}"></div>
         </nav>
     </header>
 
-    <main class="flex-grow p-3" sec:authorize="isAuthenticated()">
+    <main class="flex-grow p-3 overflow-y-auto" sec:authorize="isAuthenticated()">
         <div th:replace="${home}"></div>
     </main>
 
-    <footer class="bg-white border-t border-slate-200 py-3 text-center text-xs text-slate-500">
+    <footer class="bg-white border-t border-slate-200 py-3 text-center text-xs text-slate-500 shrink-0">
         &copy;2026 - Raimar Silva
     </footer>
 </body>
