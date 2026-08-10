@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" th:href="@{/css/output.css}">
     <title th:replace="${title}">Título padrão</title>
 </head>
 
@@ -17,7 +17,7 @@
         </nav>
     </header>
 
-    <main class="flex-grow p-3 overflow-y-auto" sec:authorize="isAuthenticated()">
+    <main class="grow p-3 overflow-y-auto" sec:authorize="isAuthenticated()">
         <div th:replace="${home}"></div>
     </main>
 

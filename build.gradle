@@ -68,6 +68,19 @@ dependencies {
 	implementation 'ognl:ognl:3.1.26'
 }
 
+// Tarefa para rodar o Tailwind CLI na raiz do projeto:
+task buildTailwind(type: Exec){
+
+	// Define onde o css compilado será salvo no spring boot:
+	commandLine './tailwindcss',
+	 '-i', './src/main/resources/static/css/input.css', 
+	 '-o', './src/main/resources/static/css/output.css', 
+	 'minify'
+}
+
+// Garante que o css seja gerado antes de empacotar o jar:
+processResources.dependsOn buildTailwind
+
 tasks.named('test') {
 	useJUnitPlatform()
 	testLogging{
