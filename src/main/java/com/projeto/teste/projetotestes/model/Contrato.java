@@ -50,7 +50,7 @@ public class Contrato {
 
   @NotBlank
   @Column(nullable = false)
-  @Size(min = 6, message = "Mínimo de 5 dígitos.")
+  @Size(min = 6, max = 8, message = "Mínimo de 5 dígitos.")
   private String edital;
 
   @NotBlank
@@ -184,6 +184,12 @@ public class Contrato {
   private String dataAssExtenso;
 
   private String contratoNumero;
+
+  public String getDataDouEditalBR() {
+    if (this.dataDouEdital == null)
+      return "";
+    return this.dataDouEdital.format(java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+  }
 
   @Override
   public String toString() {
