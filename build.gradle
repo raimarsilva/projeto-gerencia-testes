@@ -68,17 +68,52 @@ dependencies {
 	implementation 'ognl:ognl:3.1.26'
 }
 
-// Tarefa para rodar o Tailwind CLI na raiz do projeto:
-task buildTailwind(type: Exec){
+// ========== BAIXAR E INSTALAR O TAILWIND NO SERVER ==========
+import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 
-	// Define onde o css compilado será salvo no spring boot:
-	commandLine './tailwindcss',
-	 '-i', './src/main/resources/static/css/input.css', 
-	 '-o', './src/main/resources/static/css/output.css', 
-	 'minify'
+// 1. Task para baixar o executável oficial do Tailwind CLI 4.3.3 de forma segura
+task downloadTailwindCli {
+    def os = DefaultNativePlatform.currentOperatingSystem
+    def arch = DefaultNativePlatform.currentArchitecture.name
+    
+    def platform = ""
+    if (os.isLinux()) {
+        platform = arch.contains("aarch64") ? "linux-arm64" : "linux-x64"
+    } else if (os.isMacOsX()) {
+        platform = arch.contains("aarch64") ? "macos-arm64" : "macos-x64"
+    } else if (os.isWindows()) {
+        platform = "windows-x64.exe"
+    }
+
+    def version = "v4.3.3" // Versão do Tailwind v4
+    def downloadUrl = "https://github.com/tailwindlabs/tailwindcss/releases/download/${version}/tailwindcss-${platform}"
+    def destination = file("${project.projectDir}/bin/tailwindcss")
+
+    outputs.file(destination)
+
+    doLast {
+        if (!destination.exists()) {
+            destination.parentFile.mkdirs()
+            new URL(downloadUrl).withInputStream { i -> destination.withOutputStream { it << i } }
+            if (!os.isWindows()) {
+                exec { commandLine 'chmod', '+x', destination.absolutePath }
+            }
+        }
+    }
 }
 
-// Garante que o css seja gerado antes de empacotar o jar:
+// 2. Task para compilar o CSS antes do Spring Boot empacotar o .jar
+task buildTailwind(type: Exec) {
+    dependsOn downloadTailwindCli
+    
+    def cliPath = file("${project.projectDir}/bin/tailwindcss").absolutePath
+    def inputCss = file("src/main/resources/static/css/input.css").absolutePath
+    def outputCss = file("src/main/resources/static/css/output.css").absolutePath
+
+    commandLine cliPath, '-i', inputCss, '-o', outputCss, '--minify'
+}
+
+// Garante que o Tailwind compila e gera o output.css dentro do JAR no Render
 processResources.dependsOn buildTailwind
 
 tasks.named('test') {
