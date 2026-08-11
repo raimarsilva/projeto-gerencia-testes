@@ -7,7 +7,9 @@ build/
 !**/src/test/**/build/
 .env
 texts.txt
-*tailwindcss*
+/tailwind*
+tailwindcss
+./tailwind*
 
 ### STS ###
 .apt_generated
