@@ -27,28 +27,29 @@
     <div class="title">
       <h1>CADASTRAR CONTRATO</h1>
     </div>
-    <form th:action="@{/cadastrar}" th:object="${contrato}" method="post" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <form th:action="@{/cadastrar}" th:object="${contrato}" method="post" class="grid grid-cols-1 md:grid-cols-3 gap-4"
+      onsubmit="this.querySelector('button[type=submit]').disabled = true;">
 
       <!-- ================= DADOS DO CONTRATO ================= -->
       <div class="col-span-full text-center">Dados do Contrato</div>
 
       <div class="flex flex-col">
         <label for="anoContrato">Ano do contrato</label>
-        <input type="number" id="anoContrato" name="anoContrato" th:value="${#dates.year(#dates.createNow())}"
-          placeholder="Ano atual" readonly>
+        <input type="number" id="anoContrato" name="anoContrato" th:value="${#dates.year(#dates.createNow())}" readonly
+          class="border-none" />
       </div>
 
       <div class="flex flex-col">
         <label for="numProc">Nº Processo</label>
-        <input type="text" id="numProc" name="numProc" placeholder="Ex: 23077/2026" maxlength="12" required
-          class="border border-slate-500 rounded-sm">
+        <input type="text" id="numProc" name="numProc" placeholder="Ex: 012345/2026-67" maxlength="14" minlength="9"
+          required class="border border-slate-500 rounded-sm" oninput="mascaraNumProc(this)" />
       </div>
 
       <div class="flex flex-col">
         <label for="edital">Edital</label>
         <input type="text" id="edital" name="edital" th:field="*{edital}" placeholder="Ex: 012/2026" maxlength="8"
-          required class="border border-slate-500 rounded-sm">
-        <span th:if="${#fields.hasErrors('edital')}" th:errors="*{edital}" class="text-sm text-red-800"></span>
+          minlength="6" required class="border border-slate-500 rounded-sm"
+          th:classappend="${#fields.hasErrors('edital')} ? 'border-red-800' : ''" oninput="mascaraEdital(this)" />
       </div>
 
       <div class="flex flex-col">
@@ -90,17 +91,17 @@
         <label for="estCivil">Estado civil</label>
         <select id="estCivil" name="estCivil" required class="border border-slate-500 rounded-sm">
           <option value="" disabled selected>Selecione...</option>
-          <option value="Solteiro(a)">Solteiro(a)</option>
-          <option value="União Estável">União Estável</option>
-          <option value="Casado(a)">Casado(a)</option>
-          <option value="Divorciado(a)">Divorciado(a)</option>
-          <option value="Viúvo(a)">Viúvo(a)</option>
+          <option value="solteiro(a)">Solteiro(a)</option>
+          <option value="união Estável">União Estável</option>
+          <option value="casado(a)">Casado(a)</option>
+          <option value="divorciado(a)">Divorciado(a)</option>
+          <option value="viúvo(a)">Viúvo(a)</option>
         </select>
       </div>
 
       <div class="flex flex-col">
         <label for="nacionalidade">Nacionalidade</label>
-        <input type="text" id="nacionalidade" name="nacionalidade" placeholder="Brasileira" maxlength="20" required
+        <input type="text" id="nacionalidade" name="nacionalidade" placeholder="Brasileira" maxlength="40" required
           class="border border-slate-500 rounded-sm">
       </div>
 
@@ -133,17 +134,18 @@
         <label for="logradouro">Logradouro</label>
         <select type="text" id="logradouro" name="logradouro" required class="border border-slate-500 rounded-sm">
           <option value="" disabled selected>Selecione...</option>
-          <option value="Rua">Rua</option>
-          <option value="Avenida">Avenida</option>
-          <option value="Travessa">Travessa</option>
-          <option value="Alameda">Alameda</option>
-          <option value="Praça">Praça</option>
+          <option value="rua">Rua</option>
+          <option value="avenida">Avenida</option>
+          <option value="travessa">Travessa</option>
+          <option value="alameda">Alameda</option>
+          <option value="praça">Praça</option>
+          <option value="sítio">Sítio</option>
         </select>
       </div>
 
       <div class="flex flex-col">
         <label for="endereco">Endereço</label>
-        <input type="text" id="endereco" name="endereco" placeholder="Nome da via" maxlength="20" required
+        <input type="text" id="endereco" name="endereco" placeholder="Nome da via" maxlength="40" required
           class="border border-slate-500 rounded-sm">
       </div>
 
@@ -156,18 +158,18 @@
       <div class="flex flex-col">
         <label for="enderecoComplemento">Complemento</label>
         <input type="text" id="enderecoComplemento" name="enderecoComplemento" placeholder="Apartamento, bloco, etc"
-          maxlength="20" class="border border-slate-500 rounded-sm">
+          maxlength="40" class="border border-slate-500 rounded-sm">
       </div>
 
       <div class="flex flex-col">
         <label for="enderecoBairro">Bairro</label>
-        <input type="text" id="enderecoBairro" name="enderecoBairro" placeholder="Bairro" maxlength="20" required
+        <input type="text" id="enderecoBairro" name="enderecoBairro" placeholder="Bairro" maxlength="40" required
           class="border border-slate-500 rounded-sm">
       </div>
 
       <div class="flex flex-col">
         <label for="enderecoCidade">Cidade</label>
-        <input type="text" id="enderecoCidade" name="enderecoCidade" placeholder="Cidade" maxlength="20" required
+        <input type="text" id="enderecoCidade" name="enderecoCidade" placeholder="Cidade" maxlength="40" required
           class="border border-slate-500 rounded-sm">
       </div>
 
@@ -288,7 +290,7 @@
         <input type="date" id="dataVigencia" name="dataVigencia" required class="border border-slate-500 rounded-sm">
       </div>
 
-      <button type="submit" class="border border-slate-500 rounded-sm">Cadastrar</button>
+      <div th:replace="~{fragments/btn-save}"></div>
 
     </form>
 

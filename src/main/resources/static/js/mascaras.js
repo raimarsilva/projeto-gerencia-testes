@@ -1,19 +1,21 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const inputEdital = document.getElementById("edital");
-    console.log('elem: ' + inputEdital);
-    if (inputEdital) {
-        inputEdital.addEventListener('input', function () {
-            // Remove tudo o que não for número
-            let valor = this.value.replace(/\D/g, "");
-            console.log('valor: ' + valor);
-            // Aplica a máscara se tiver mais de 4 dígitos (separa os últimos 4 para o ano)
-            if (valor.length > 4) {
-                let posicaoBarra = valor.length - 4;
-                valor = valor.substring(0, posicaoBarra) + "/" + valor.substring(posicaoBarra);
-                console.log('valor alterado: ' + valor);
-            }
-            this.value = valor;
-            console.log('this.value: ' + this.value);
-        });
+function mascaraNumProc(input) {
+    let valor = input.value.replace(/\D/g, "");
+    if (valor.length > 2) {
+        let posicaoTraco = valor.length - 2;
+        valor = valor.substring(0, posicaoTraco) + "-" + valor.substring(posicaoTraco);
     }
-});
+    if (valor.length > 7) {
+        let posicaoBarra = valor.length - 7;
+        valor = valor.substring(0, posicaoBarra) + "/" + valor.substring(posicaoBarra);
+    }
+    input.value = valor;
+}
+
+function mascaraEdital(input) {
+    let valor = input.value.replace(/\D/g, "");
+    if (valor.length > 4) {
+        let posicaoBarra = valor.length - 4;
+        valor = valor.substring(0, posicaoBarra) + "/" + valor.substring(posicaoBarra);
+    }
+    input.value = valor;
+}

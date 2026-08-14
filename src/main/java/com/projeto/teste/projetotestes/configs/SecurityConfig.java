@@ -6,13 +6,15 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.logout.HeaderWriterLogoutHandler;
+import org.springframework.security.web.header.writers.ClearSiteDataHeaderWriter;
+import org.springframework.security.web.header.writers.ClearSiteDataHeaderWriter.Directive;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
   private final SupabaseAuthenticationProvider authProvider;
-
   private static final String LOGINURL = "/login";
 
   public SecurityConfig(SupabaseAuthenticationProvider authProvider) {
@@ -22,11 +24,13 @@ public class SecurityConfig {
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.csrf(Customizer.withDefaults()).authenticationProvider(authProvider)
-        .headers(headers -> headers.defaultsDisabled().cacheControl(Customizer.withDefaults()))
+        .headers(headers -> headers.cacheControl(Customizer.withDefaults()))
         .authorizeHttpRequests(
             auth -> auth.antMatchers(LOGINURL, "/error", "/css/**", "/*.jsf").permitAll().anyRequest().authenticated())
         .formLogin(form -> form.loginPage(LOGINURL).defaultSuccessUrl("/home", true).permitAll())
-        .logout(logout -> logout.logoutSuccessUrl(LOGINURL).deleteCookies("JSESSIONID").invalidateHttpSession(true));
+        .logout(logout -> logout.logoutSuccessUrl(LOGINURL).invalidateHttpSession(true).clearAuthentication(true)
+            .deleteCookies("JSESSIONID").addLogoutHandler(new HeaderWriterLogoutHandler(
+                new ClearSiteDataHeaderWriter(Directive.COOKIES, Directive.CACHE, Directive.STORAGE))));
 
     return http.build();
   }
