@@ -68,7 +68,7 @@
         <select type="text" id="assinante" name="assinante" required class="border border-slate-500 rounded-sm">
           <option>Selecione...</option>
           <option>Alberto Segundo Spínola da Hora</option>
-          <option>Solange Àlvares dos Santos</option>
+          <option>Solange Álvares dos Santos</option>
         </select>
       </div>
 
@@ -83,8 +83,8 @@
 
       <div class="flex flex-col">
         <label for="cpf">CPF</label>
-        <input type="text" id="cpf" name="cpf" placeholder="somente numeros" maxlength="11" required
-          class="border border-slate-500 rounded-sm">
+        <input type="text" id="cpf" name="cpf" placeholder="somente numeros" minlength="14" maxlength="14" required
+          class="border border-slate-500 rounded-sm" autocomplete="off" oninput="mascaraCpf(this)">
       </div>
 
       <div class="flex flex-col">
@@ -101,14 +101,14 @@
 
       <div class="flex flex-col">
         <label for="nacionalidade">Nacionalidade</label>
-        <input type="text" id="nacionalidade" name="nacionalidade" placeholder="Brasileira" maxlength="40" required
+        <input type="text" id="nacionalidade" name="nacionalidade" placeholder="brasileira" maxlength="40" required
           class="border border-slate-500 rounded-sm">
       </div>
 
       <div class="flex flex-col">
         <label for="rg">RG</label>
         <input type="text" id="rg" name="rg" placeholder="Ex: 123456789-0" maxlength="20" required
-          class="border border-slate-500 rounded-sm">
+          class="border border-slate-500 rounded-sm" autocomplete="off">
       </div>
 
       <div class="flex flex-col">
@@ -121,7 +121,7 @@
       <div class="flex flex-col">
         <label for="passaporte">Passaporte</label>
         <input type="text" id="passaporte" name="passaporte" placeholder="Número do passaporte" maxlength="20"
-          class="border border-slate-500 rounded-sm">
+          class="border border-slate-500 rounded-sm" autocomplete="off">
       </div>
 
       <div class="flex flex-col">
@@ -156,9 +156,9 @@
       </div>
 
       <div class="flex flex-col">
-        <label for="enderecoComplemento">Complemento</label>
-        <input type="text" id="enderecoComplemento" name="enderecoComplemento" placeholder="Apartamento, bloco, etc"
-          maxlength="40" class="border border-slate-500 rounded-sm">
+        <label for="enderecoCompl">Complemento</label>
+        <input type="text" id="enderecoCompl" name="enderecoCompl" placeholder="Apartamento, bloco, etc" maxlength="40"
+          class="border border-slate-500 rounded-sm">
       </div>
 
       <div class="flex flex-col">
