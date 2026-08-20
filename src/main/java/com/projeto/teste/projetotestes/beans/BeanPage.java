@@ -1,13 +1,12 @@
 package com.projeto.teste.projetotestes.beans;
 
-import javax.annotation.ManagedBean;
-
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
 import lombok.Getter;
 import lombok.Setter;
 
-@ManagedBean
+@Component
 @RequestScope
 @Getter
 @Setter

@@ -1,6 +1,6 @@
 plugins {
-	id 'org.springframework.boot' version '2.7.2'
-	id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+	id 'org.springframework.boot' version '3.5.16'
+	id 'io.spring.dependency-management' version '1.1.6'
 	id 'java'
 	// Other Plugins
 	id("jacoco")
@@ -9,11 +9,11 @@ plugins {
 }
 
 jacoco {
-	toolVersion = "0.8.7"
+	toolVersion = "0.8.11"
 }
 
 group = 'com.projeto.teste'
-version = '0.1.93'
+version = '0.2.48'
 
 configurations {
 	compileOnly {
@@ -34,19 +34,22 @@ repositories {
 
 dependencyManagement{
 	imports{
-		mavenBom 'org.joinfaces:joinfaces-dependencies:4.7.18'
+		mavenBom 'org.joinfaces:joinfaces-dependencies:5.3.2'
 	}
 }
 
 dependencies {
+	// Provedor de validação Jakarta (Hibernate Validator)
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+	
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-	implementation 'org.joinfaces:jsf-spring-boot-starter'
+	implementation 'org.joinfaces:mojarra-spring-boot-starter:5.3.2'
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	compileOnly 'org.projectlombok:lombok'
 
@@ -57,15 +60,13 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	// Thymeleaf with security
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 
 	// external library for converting numbers to words
 	implementation 'pl.allegro.finance:tradukisto:4.3.2'
 
 	// Auth0
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
-
-	implementation 'ognl:ognl:3.1.26'
 }
 
 // ========== BAIXAR E INSTALAR O TAILWIND NO SERVER ==========

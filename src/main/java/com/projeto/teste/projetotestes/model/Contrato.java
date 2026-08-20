@@ -3,16 +3,16 @@ package com.projeto.teste.projetotestes.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.Convert;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -152,7 +152,6 @@ public class Contrato {
   @Column(nullable = false)
   private BigDecimal remuneracao;
 
-  @NotBlank
   @Column(nullable = false, length = 512)
   private String remuneracaoExtenso;
 
@@ -175,11 +174,9 @@ public class Contrato {
   private LocalDate dataVigencia;
 
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-  @NotNull
   @Column(nullable = false)
   private LocalDate dataLimite;
 
-  @NotBlank
   @Column(nullable = false, length = 512)
   private String dataAssExtenso;
 
