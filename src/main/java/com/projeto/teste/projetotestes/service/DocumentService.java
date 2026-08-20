@@ -16,7 +16,6 @@ import com.projeto.teste.projetotestes.model.Contrato;
 import com.projeto.teste.projetotestes.repository.ContratoRepository;
 
 @Service
-/** Serviço responsável por gerar documentos PDF a partir de templates HTML. */
 public class DocumentService {
 
   private final RestTemplate rest;

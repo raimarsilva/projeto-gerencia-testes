@@ -28,8 +28,8 @@ public class SecurityConfig {
     http.csrf(Customizer.withDefaults()).authenticationProvider(authProvider)
         .headers(headers -> headers.cacheControl(Customizer.withDefaults()))
         .sessionManagement(session -> session.invalidSessionUrl(LOGINURL + "?timeout=true"))
-        .authorizeHttpRequests(
-            auth -> auth.antMatchers(LOGINURL, "/error", "/css/**", "/*.jsf").permitAll().anyRequest().authenticated())
+        .authorizeHttpRequests(auth -> auth.requestMatchers(LOGINURL, "/error", "/css/**", "/*.jsf").permitAll()
+            .anyRequest().authenticated())
         .formLogin(form -> form.loginPage(LOGINURL).defaultSuccessUrl("/home", true).permitAll())
         .logout(logout -> logout.logoutSuccessUrl(LOGINURL).invalidateHttpSession(true).clearAuthentication(true)
             .deleteCookies("JSESSIONID")

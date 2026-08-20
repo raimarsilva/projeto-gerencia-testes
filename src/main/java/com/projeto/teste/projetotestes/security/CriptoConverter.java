@@ -7,8 +7,8 @@ import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import javax.persistence.AttributeConverter;
-import javax.persistence.Converter;
+import jakarta.persistence.AttributeConverter;
+import jakarta.persistence.Converter;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -26,6 +26,7 @@ public class CriptoConverter implements AttributeConverter<String, String> {
   private final SecureRandom secureRandom = new SecureRandom();
 
   @Value("${DB_CRIPTO_KEY:}")
+  @SuppressWarnings("java:S2696")
   public void setSecretKey(String key) {
     CriptoConverter.secretKey = key;
   }

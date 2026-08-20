@@ -269,7 +269,7 @@
         <span for="remuneracao">Remuneração:</span>
         <input type="hidden" id="remInput" name="remuneracao" />
         <strong for="renum" id="remun"
-          th:text="${#numbers.formatDecimal(salarios[0].value, 1, 'POINT', 2, 'COMMA')}">0,00</strong>
+          th:text="${salarios != null and !salarios.empty ? #numbers.formatDecimal(salarios[0].value, 1, 'POINT', 2, 'COMMA') : ''}">0,00</strong>
         <input type="hidden" id="renum" />
       </div>
 

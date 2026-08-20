@@ -1,6 +1,6 @@
 package com.projeto.teste.projetotestes.controller;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
@@ -40,11 +40,20 @@ public class ContratoController {
   }
 
   @PostMapping(path = "/cadastrar")
-  public String salvar(@Valid @ModelAttribute @NonNull Contrato contrato, BindingResult result) {
+  public String salvar(@Valid @ModelAttribute @NonNull Contrato contrato, BindingResult result, Model model) {
+    System.out.println(">>> Tentando salvar contrato: " + contrato.getNumProc());
+
     if (result.hasErrors()) {
+      System.out.println(">>> O formulário possui os seguintes erros de validação:");
+      result.getAllErrors().forEach(erro -> System.out.println(" - " + erro.toString()));
+
+      model.addAttribute("unidades", Unidade.values());
+      model.addAttribute("salarios", salaryService.listarTodos());
       return "cadastro";
     }
+
     contratoService.salvar(contrato);
+    System.out.println(">>> Contrato salvo com sucesso!");
     return "redirect:/home";
   }
 
