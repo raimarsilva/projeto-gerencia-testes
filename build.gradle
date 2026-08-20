@@ -34,7 +34,7 @@ repositories {
 
 dependencyManagement{
 	imports{
-		mavenBom 'org.joinfaces:joinfaces-dependencies:5.3.2'
+		mavenBom 'org.joinfaces:joinfaces-dependencies:6.1.0'
 	}
 }
 
@@ -45,7 +45,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-	implementation 'org.joinfaces:mojarra-spring-boot-starter:5.3.2'
+	implementation 'org.joinfaces:mojarra-spring-boot-starter:6.1.0'
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
