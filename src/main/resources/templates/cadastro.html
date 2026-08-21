@@ -41,8 +41,10 @@
 
       <div class="flex flex-col">
         <label for="numProc">Nº Processo</label>
-        <input type="text" id="numProc" name="numProc" placeholder="Ex: 012345/2026-67" maxlength="14" minlength="9"
-          required class="border border-slate-500 rounded-sm" oninput="mascaraNumProc(this)" />
+        <input type="text" id="numProc" name="numProc" placeholder="Ex: 000123/2026-45" maxlength="14" minlength="9"
+          th:classappend="${#fields.hasErrors('numProc')} ? 'border-red-500' : ''" required
+          class="border border-slate-500 rounded-sm" oninput="mascaraNumProc(this)" />
+        <p th:if="${#fields.hasErrors('numProc')}" th:errors="*{numProc}" class="text-red-500"></p>
       </div>
 
       <div class="flex flex-col">
