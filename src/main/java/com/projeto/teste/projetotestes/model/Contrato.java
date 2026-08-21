@@ -37,7 +37,7 @@ public class Contrato {
   // ############### dados publicos ###############
   @NotBlank
   @Column(nullable = false)
-  @Size(min = 9)
+  @Size(min = 14, max = 14, message = "Este campo está incompleto (mínimo de 14 dígitos).")
   private String numProc;
 
   @NotNull
