@@ -1,7 +1,7 @@
 package com.projeto.teste.projetotestes.configs;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.lang.NonNull;
+import org.jspecify.annotations.NonNull;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 

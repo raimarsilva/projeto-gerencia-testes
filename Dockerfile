@@ -5,7 +5,7 @@ WORKDIR /app
 COPY . .
 RUN chmod +x gradlew
 #RUN ./gradlew build -x test
-RUN --mount=type=cache,target=/root/.gradle ./gradlew build -x test --stacktrace
+RUN --mount=type=cache,target=/root/.gradle ./gradlew bootJar -x test --no-daemon
 
 #RUNTIME
 FROM eclipse-temurin:17-jre
