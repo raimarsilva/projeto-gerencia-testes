@@ -1,0 +1,11 @@
+# services:
+#   - type: web
+#   name: projeto-gerencia-testes
+#   env: docker
+#   plan: free
+#   region: oregon
+#   buildCommand: ./gradlew build
+#   startCommand: java -jar build/libs/*.jar
+#   envVars:
+#     - key: SPRING_PROFILES_ACTIVE
+#     value: prd

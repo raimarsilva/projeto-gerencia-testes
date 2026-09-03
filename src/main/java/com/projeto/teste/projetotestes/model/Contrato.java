@@ -180,6 +180,7 @@ public class Contrato {
   @Column(nullable = false, length = 512)
   private String dataAssExtenso;
 
+  @Column(length = 4)
   private String contratoNumero;
 
   public String getDataDouEditalBR() {

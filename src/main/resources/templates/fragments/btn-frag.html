@@ -1,5 +1,11 @@
 <th:block th:fragment="gen-doc(id)">
-    <input type="button" title="Gerar contrato" value="PDF &#128462;"
+    <input type="button" title="Gerar contrato" value="Minuta &#128462;"
         th:onclick="|window.open('@{/gerar(id=${id})}', '_blank', 'noopener,noreferrer');|"
+        style="border: 0; background: none; cursor: pointer; font-size: 1.2rem;" />
+</th:block>
+
+<th:block th:fragment="save-num(id)">
+    <input type="button" title="Inserir número" value="Numerar"
+        th:onclick="@{/numerar(id=${id})}"
         style="border: 0; background: none; cursor: pointer; font-size: 1.2rem;" />
 </th:block>

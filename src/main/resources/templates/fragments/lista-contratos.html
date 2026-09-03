@@ -11,7 +11,7 @@
                 <th>Carga Horária</th>
                 <th>Data Assinatura</th>
                 <th>Data Vigência</th>
-                <th>Nacionalidade</th>
+                <th>Número</th>
                 <th>Opções</th>
             </tr>
         </thead>
@@ -25,7 +25,12 @@
                 <td th:text="${c.cargaHoraria}"></td>
                 <td th:text="${c.dataAssinatura}"></td>
                 <td th:text="${c.dataVigencia}"></td>
-                <td th:text="${c.nacionalidade}"></td>
+                <td th:switch="${#strings.isEmpty(c.contratoNumero)}">
+                    <th:block th:case="false" th:text="${c.contratoNumero}"></th:block>
+                    <th:block th:case="true">
+                        <th:block th:replace="~{fragments/btn-frag :: save-num(id=${c.id})}"></th:block>
+                    </th:block>
+                </td>
                 <td>
                     <th:block th:replace="~{fragments/btn-frag :: gen-doc(id=${c.id})}"></th:block>
                 </td>
