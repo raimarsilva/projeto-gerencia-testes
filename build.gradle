@@ -94,7 +94,7 @@ task downloadTailwindCli {
             destination.parentFile.mkdirs()
             new URL(downloadUrl).withInputStream { i -> destination.withOutputStream { it << i } }
             if (!os.isWindows()) {
-                exec { commandLine 'chmod', '+x', destination.absolutePath }
+                destination.setExecutable(true)
             }
         }
     }
